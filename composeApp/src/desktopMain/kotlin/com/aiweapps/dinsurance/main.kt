@@ -52,4 +52,4 @@ fun desktopDinsuranceApp() {
     }
 }
 
-private val DEFAULT_DESKTOP_SIZE: DpSize = DpSize(560.dp, 800.dp)
+private val DEFAULT_DESKTOP_SIZE: DpSize = DpSize(360.dp, 800.dp)

@@ -5,7 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.aiweapps.dinsurance.presentation.screens.login.LoginScreen
+import com.aiweapps.dinsurance.presentation.screens.start.login.LoginScreen
+import com.aiweapps.dinsurance.presentation.screens.start.StartScreen
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
@@ -44,6 +45,9 @@ private fun Children(component: AppComponent, modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.background,
         ) {
             when (val child = it.instance) {
+                is AppComponent.Child.StartChild -> StartScreen(
+                    component = child.component
+                )
                 is AppComponent.Child.LoginChild -> LoginScreen(
                     component = child.component
                 )

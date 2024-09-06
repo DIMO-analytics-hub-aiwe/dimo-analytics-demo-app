@@ -1,0 +1,118 @@
+package com.aiweapps.dinsurance.presentation.screens.start.login
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalFocusManager
+import com.aiweapps.dinsurance.presentation.components.buttons.DinsurancePrimaryButton
+import com.aiweapps.dinsurance.presentation.components.buttons.DinsuranceSecondaryButton
+import com.aiweapps.dinsurance.presentation.components.input.MaterialInput
+import com.aiweapps.dinsurance.presentation.icons.DimoLogo
+import com.aiweapps.dinsurance.presentation.screens.start.common.WelcomeDimoComponent
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_24
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_48
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
+import d_insurance.composeapp.generated.resources.ButtonLogin
+import d_insurance.composeapp.generated.resources.ButtonLoginViaDimo
+import d_insurance.composeapp.generated.resources.EnterEmail
+import d_insurance.composeapp.generated.resources.EnterPassword
+import d_insurance.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.stringResource
+
+@Composable
+internal fun LoginScreen(
+    component: LoginComponent,
+) {
+    var text by remember {
+        mutableStateOf("")
+    }
+    val focusManager = LocalFocusManager.current
+    Box(
+        modifier = Modifier.clickable(
+            indication = null,
+            interactionSource = remember { MutableInteractionSource() },
+            onClick = focusManager::clearFocus
+        )
+    ) {
+        WelcomeDimoComponent {
+            Spacer(modifier = Modifier.height(height = Material3_Dp_16))
+            MaterialInput(
+                name = stringResource(resource = Res.string.EnterEmail),
+                text = text,
+                focusManager = focusManager,
+                onTextChange = {
+                    text = it
+                }
+            )
+            Spacer(modifier = Modifier.height(height = Material3_Dp_8))
+            MaterialInput(
+                name = stringResource(resource = Res.string.EnterPassword),
+                text = text,
+                focusManager = focusManager,
+                password = true,
+                onTextChange = {
+                    text = it
+                }
+            )
+            Spacer(modifier = Modifier.height(height = Material3_Dp_48))
+            DinsurancePrimaryButton(
+                text = stringResource(resource = Res.string.ButtonLogin),
+                onClick = {
+
+                }
+            )
+            Spacer(modifier = Modifier.height(height = Material3_Dp_8))
+            DinsuranceSecondaryButton(
+                text = stringResource(resource = Res.string.ButtonLoginViaDimo),
+                icon = {
+                    Icon(
+                        modifier = Modifier.size(
+                            size = Material3_Dp_24
+                        ),
+                        imageVector = Icons.DimoLogo,
+                        tint = MaterialTheme.colorScheme.primary,
+                        contentDescription = null,
+                    )
+                },
+                onClick = {
+
+                }
+            )
+        }
+    }
+    Box(
+        modifier = Modifier.fillMaxSize().statusBarsPadding()
+    ) {
+        Icon(
+            modifier = Modifier
+                .padding(all = Material3_Dp_8)
+                .clip(shape = CircleShape)
+                .clickable(onClick = component::onBackPressed)
+                .padding(all = Material3_Dp_4),
+            imageVector = Icons.Default.ArrowBackIosNew,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary
+        )
+    }
+
+}

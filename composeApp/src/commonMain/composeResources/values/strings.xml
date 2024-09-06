@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="AppName">D-Insurance</string>
+    <string name="LoginTitle">Welcome to DIMO</string>
+    <string name="LoginSubtitle">First app that allows you to own and monetize</string>
+    <string name="ButtonLogin">Login</string>
+    <string name="ButtonCreateNewAccount">Create New Account</string>
+    <string name="EnterEmail">Enter your email</string>
+    <string name="EnterPassword">Enter your password</string>
+    <string name="ForgotPassword">Forgot password?</string>
+    <string name="ButtonLoginViaDimo">Login via DIMO</string>
 </resources>

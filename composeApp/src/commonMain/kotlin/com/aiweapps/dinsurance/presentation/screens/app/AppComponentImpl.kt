@@ -1,16 +1,18 @@
 package com.aiweapps.dinsurance.presentation.screens.app
 
+import com.aiweapps.dinsurance.presentation.decompose.base.BaseComponent
+import com.aiweapps.dinsurance.presentation.screens.start.StartComponentImpl
+import com.aiweapps.dinsurance.presentation.screens.start.login.LoginComponentImpl
+import com.aiweapps.dinsurance.presentation.theme.AppThemeState
+import com.aiweapps.dinsurance.presentation.theme.ThemeMode
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.popTo
+import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
-import com.aiweapps.dinsurance.presentation.decompose.base.BaseComponent
-import com.aiweapps.dinsurance.presentation.screens.login.LoginComponentImpl
-import com.aiweapps.dinsurance.presentation.theme.AppThemeState
-import com.aiweapps.dinsurance.presentation.theme.ThemeMode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.serialization.Serializable
 import org.koin.core.component.get
@@ -23,7 +25,7 @@ class AppComponentImpl(
     private val _appThemeState: MutableStateFlow<AppThemeState> = MutableStateFlow(
         AppThemeState(
             contextHolder = get(),
-            themeMode = ThemeMode.System
+            themeMode = ThemeMode.Light //TODO should be system later by default
         )
     )
 
@@ -33,7 +35,7 @@ class AppComponentImpl(
         childStack(
             source = nav,
             serializer = Config.serializer(),
-            initialConfiguration = Config.LoginConfig, //TOOD if logged in then should be main config
+            initialConfiguration = Config.StartConfig, //TODO if logged in then should be main config
             childFactory = ::child,
         )
 
@@ -41,12 +43,23 @@ class AppComponentImpl(
 
     private fun child(config: Config, componentContext: ComponentContext): AppComponent.Child =
         when (config) {
-            is Config.LoginConfig ->
-                AppComponent.Child.LoginChild(
-                    component = LoginComponentImpl(
+            is Config.StartConfig ->
+                AppComponent.Child.StartChild(
+                    component = StartComponentImpl(
                         componentContext = componentContext,
+                        onLogin = {
+                            nav.push(configuration = Config.LoginConfig)
+                        }
                     )
                 )
+            is Config.LoginConfig -> AppComponent.Child.LoginChild(
+                component = LoginComponentImpl(
+                    componentContext = componentContext,
+                    onBack = {
+                        onBackClicked()
+                    }
+                )
+            )
         }
 
     override fun onBackClicked() {
@@ -61,6 +74,7 @@ class AppComponentImpl(
     private sealed interface Config {
 
         @Serializable
+        data object StartConfig : Config
         data object LoginConfig : Config
     }
 }
