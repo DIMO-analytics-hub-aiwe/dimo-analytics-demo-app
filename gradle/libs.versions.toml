@@ -33,7 +33,7 @@ barcodeScanning = "17.3.0"
 uri-kmp = "0.0.15"
 haze-stable = "0.7.3"
 qrose-qr = "1.0.1"
-ktor = "2.3.12"
+ktor = "3.0.0-beta-2"
 
 [libraries]
 # Android
