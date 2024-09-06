@@ -1,5 +1,6 @@
 package com.aiweapps.dinsurance.data
 
+import com.aiweapps.dinsurance.data.datastore.TokensDatastore
 import com.aiweapps.dinsurance.data.dto.TokenResponseDTO
 import com.aiweapps.dinsurance.utils.json
 import com.aiweapps.dinsurance.utils.launchBrowser
@@ -12,6 +13,7 @@ import io.ktor.http.contentType
 
 class LoginRepository(
     private val client: HttpClient,
+    private val tokensDataStore: TokensDatastore,
 ) {
 
     companion object {
@@ -33,7 +35,7 @@ class LoginRepository(
 
     suspend fun exchangeCodeForToken(
         code: String,
-    ): TokenResponseDTO {
+    ) {
         val response = client.submitForm(
             url = "https://auth.dimo.zone/token",
             formParameters = Parameters.build {
@@ -45,7 +47,12 @@ class LoginRepository(
         ) {
             contentType(ContentType.Application.FormUrlEncoded)
         }
-        return json.decodeFromString<TokenResponseDTO>(response.bodyAsText())
+        val tokens = json.decodeFromString<TokenResponseDTO>(response.bodyAsText())
+        println("LoginFlow: tokens: $tokens")
+
+        tokensDataStore.setTokens(
+            tokens = tokens,
+        )
     }
 
 }

@@ -35,12 +35,12 @@ class LoginComponentImpl(
                             _state.update {
                                 it.copy(isLoading = true)
                             }
-                            val result = repository.exchangeCodeForToken(code = code)
+                            repository.exchangeCodeForToken(code = code)
                             _state.update {
                                 it.copy(isLoading = false)
                             }
+                            //TODO навигация на главную
                             snack(stringResource = Res.string.SuccessGettingTokens)
-                            println("LoginFlow: tokens: $result")
                         }
                     }
             },
