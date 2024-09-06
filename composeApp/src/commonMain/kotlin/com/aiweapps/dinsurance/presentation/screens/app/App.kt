@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.aiweapps.dinsurance.presentation.screens.start.login.LoginScreen
 import com.aiweapps.dinsurance.presentation.screens.start.StartScreen
+import com.aiweapps.dinsurance.presentation.screens.start.main.MainScreen
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
@@ -49,6 +50,9 @@ private fun Children(component: AppComponent, modifier: Modifier = Modifier) {
                     component = child.component
                 )
                 is AppComponent.Child.LoginChild -> LoginScreen(
+                    component = child.component
+                )
+                is AppComponent.Child.MainChild -> MainScreen(
                     component = child.component
                 )
             }

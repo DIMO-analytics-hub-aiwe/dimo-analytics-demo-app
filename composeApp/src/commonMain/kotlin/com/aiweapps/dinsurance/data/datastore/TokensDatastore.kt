@@ -8,6 +8,11 @@ class TokensDatastore(
     datasource = tokensDatasource
 ) {
 
+    fun isLoggedIn(): Boolean {
+        println("QQ access token ${tokensDatasource.stateFlow.value.accessToken}")
+        return tokensDatasource.stateFlow.value.accessToken != null
+    }
+
     fun setTokens(
         tokens: TokenResponseDTO,
         invokeOnCompletion: (() -> Unit)? = null

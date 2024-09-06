@@ -2,6 +2,7 @@ package com.aiweapps.dinsurance.presentation.screens.app
 
 import com.aiweapps.dinsurance.presentation.screens.start.login.LoginComponent
 import com.aiweapps.dinsurance.presentation.screens.start.StartComponent
+import com.aiweapps.dinsurance.presentation.screens.start.main.MainComponent
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.backhandler.BackHandlerOwner
@@ -18,5 +19,6 @@ interface AppComponent : BackHandlerOwner {
     sealed class Child {
         class StartChild(val component: StartComponent) : Child()
         class LoginChild(val component: LoginComponent) : Child()
+        class MainChild(val component: MainComponent) : Child()
     }
 }

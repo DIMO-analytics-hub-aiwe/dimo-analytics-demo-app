@@ -11,12 +11,15 @@ import com.arkivanov.decompose.value.update
 import d_insurance.composeapp.generated.resources.Res
 import d_insurance.composeapp.generated.resources.SomethingWentWrong
 import d_insurance.composeapp.generated.resources.SuccessGettingTokens
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.component.get
 
 class LoginComponentImpl(
     componentContext: ComponentContext,
     private val onBack: () -> Unit,
+    private val onSuccessLogin: () -> Unit
 ) : LoginComponent, BaseComponent(componentContext) {
 
     private val repository: LoginRepository = get()
@@ -39,8 +42,10 @@ class LoginComponentImpl(
                             _state.update {
                                 it.copy(isLoading = false)
                             }
-                            //TODO навигация на главную
                             snack(stringResource = Res.string.SuccessGettingTokens)
+                            withContext(Dispatchers.Main) {
+                                onSuccessLogin()
+                            }
                         }
                     }
             },
