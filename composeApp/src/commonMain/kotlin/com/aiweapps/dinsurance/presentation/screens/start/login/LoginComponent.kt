@@ -1,6 +1,11 @@
 package com.aiweapps.dinsurance.presentation.screens.start.login
 
+import androidx.compose.runtime.Immutable
+import com.arkivanov.decompose.value.Value
+
 interface LoginComponent {
+
+    val state: Value<LoginState>
 
     fun onBackPressed()
 
@@ -8,3 +13,8 @@ interface LoginComponent {
 
     fun onLoginViaDimoPressed()
 }
+
+@Immutable
+data class LoginState(
+    val isLoading: Boolean = false
+)

@@ -15,10 +15,12 @@ import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 @Composable
 fun DinsurancePrimaryButton(
     text: String,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     TextButton(
         modifier = Modifier.fillMaxWidth(),
+        enabled = enabled,
         colors = ButtonDefaults.textButtonColors().copy(
             containerColor = MaterialTheme.colorScheme.outline,
             contentColor = Color.Black
@@ -34,11 +36,13 @@ fun DinsurancePrimaryButton(
 @Composable
 fun DinsuranceSecondaryButton(
     text: String,
+    enabled: Boolean = true,
     icon: (@Composable () -> Unit)? = null,
     onClick: () -> Unit
 ) {
     TextButton(
         modifier = Modifier.fillMaxWidth(),
+        enabled = enabled,
         colors = ButtonDefaults.textButtonColors().copy(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = Color.Black

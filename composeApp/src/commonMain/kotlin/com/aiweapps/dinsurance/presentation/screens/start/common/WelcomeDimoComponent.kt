@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
@@ -19,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.aiweapps.dinsurance.presentation.icons.DimoLogo
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_48
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import d_insurance.composeapp.generated.resources.LoginSubtitle
@@ -29,14 +27,13 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun WelcomeDimoComponent(
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background)
-            .systemBarsPadding()
-            .padding(horizontal = Material3_Dp_16),
+            .systemBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {

@@ -46,6 +46,7 @@ internal fun MaterialInput(
     errorMessage: StringResource? = null,
     hintMessage: StringResource? = null,
     isError: Boolean = false,
+    enabled: Boolean = true,
     buttonType: FormFieldButtonType = FormFieldButtonType.Next,
     password: Boolean = false,
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -58,6 +59,7 @@ internal fun MaterialInput(
             value = text,
             onValueChange = onTextChange,
             isError = isError,
+            enabled = enabled,
             modifier = modifier.fillMaxWidth().onFocusChanged { focusState ->
                 isFocused = focusState.isFocused
             },

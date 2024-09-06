@@ -9,4 +9,6 @@
     <string name="EnterPassword">Enter your password</string>
     <string name="ForgotPassword">Forgot password?</string>
     <string name="ButtonLoginViaDimo">Login via DIMO</string>
+    <string name="SomethingWentWrong">Something went wrong</string>
+    <string name="SuccessGettingTokens">Tokens successfully received</string>
 </resources>
