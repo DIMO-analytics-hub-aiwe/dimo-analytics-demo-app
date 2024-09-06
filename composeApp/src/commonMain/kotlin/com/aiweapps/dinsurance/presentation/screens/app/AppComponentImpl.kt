@@ -75,6 +75,8 @@ class AppComponentImpl(
 
         @Serializable
         data object StartConfig : Config
+
+        @Serializable
         data object LoginConfig : Config
     }
 }

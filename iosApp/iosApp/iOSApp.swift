@@ -48,6 +48,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+            let code = URLComponents(url: url, resolvingAgainstBaseURL: false)?
+                    .queryItems?.first(where: { $0.name == "code" })?.value
+
+                OAuthCallbackHandler().handleAuthCode(code: code) { error in
+                    if let error = error {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                }
+            return true
+        }
+
     fileprivate func getAppInitParamsHolder() -> AppInitParamsHolder {
         if (appInitParamsHolder == nil) {
             appInitParamsHolder = AppInitParamsHolder(savedState: nil)

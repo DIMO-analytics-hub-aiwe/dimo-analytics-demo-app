@@ -64,6 +64,7 @@ kotlin {
             implementation(libs.google.accompanist.permissions)
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.browser)
             implementation(libs.ktor.client.android)
         }
         iosMain.dependencies {

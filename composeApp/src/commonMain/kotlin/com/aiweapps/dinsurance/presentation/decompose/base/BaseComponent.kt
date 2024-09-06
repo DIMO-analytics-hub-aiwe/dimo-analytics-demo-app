@@ -2,6 +2,7 @@ package com.aiweapps.dinsurance.presentation.decompose.base
 
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
+import com.aiweapps.dinsurance.data.ContextHolder
 import com.aiweapps.dinsurance.presentation.decompose.asValueUtil
 import com.aiweapps.dinsurance.presentation.decompose.coroutineScope
 import com.aiweapps.dinsurance.utils.VibrationManager
@@ -30,6 +31,7 @@ abstract class BaseComponent(
     protected val scope: CoroutineScope
         get() = coroutineScope(Dispatchers.Main.immediate)
     protected val vibrationManager: VibrationManager = get()
+    protected val contextHolder: ContextHolder = get()
 
     private val snackbarHostState: SnackbarHostState = get<SnackbarHostState>()
 
