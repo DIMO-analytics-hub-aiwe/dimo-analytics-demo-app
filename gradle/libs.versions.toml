@@ -1,0 +1,110 @@
+[versions]
+agp = "8.5.2"
+android-compileSdk = "34"
+android-minSdk = "26"
+android-targetSdk = "34"
+androidx-activityCompose = "1.9.2"
+androidx-crypto = "1.1.0-alpha06"
+androidx-camera2 = "1.3.4"
+androidx-biometric = "1.2.0-alpha05"
+cmpImagePickNCropVersion = "1.0.1"
+compose-plugin = "1.6.11"
+decompose = "3.2.0-alpha02"
+filekitCompose = "0.7.0"
+google-errorproneannotations = "2.28.0"
+kotlin = "2.0.20"
+essenty = "2.2.0-alpha03"
+kotlinxDatetime = "0.6.0"
+kotlinxCoroutines = "1.8.1"
+kotlinxSerialization = "1.7.1"
+kotlincrypto = "0.5.1"
+kotlincrypto-secure-random = "0.3.1"
+encoding = "2.2.1"
+uuid = "0.8.4"
+buffer = "1.4.2"
+koin = "4.0.0-RC1"
+multiplatform-settings = "1.2.0-beap1"
+compottie="2.0.0-beta02"
+webcamCapture = "0.3.12"
+webcamCaptureDriverNative = "1.0.0"
+zxing-core = "3.5.3"
+accompanist = "0.35.1-alpha"
+barcodeScanning = "17.3.0"
+uri-kmp = "0.0.15"
+haze-stable = "0.7.3"
+qrose-qr = "1.0.1"
+
+[libraries]
+# Android
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "androidx-crypto" }
+androidx-camera = { module = "androidx.camera:camera-camera2", version.ref = "androidx-camera2" }
+androidx-cameraLifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "androidx-camera2" }
+androidx-cameraPreview = { module = "androidx.camera:camera-view", version.ref = "androidx-camera2" }
+androidx-biometric = { module = "androidx.biometric:biometric-ktx", version.ref = "androidx-biometric" }
+
+# Google
+google-errorproneannotations = { module = "com.google.errorprone:error_prone_annotations", version.ref = "google-errorproneannotations" }
+google-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
+google-mlkit-barcodeScanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "barcodeScanning" }
+
+# Decompose
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-essenty-lifecycle = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "essenty" }
+decompose-essenty-stateKeeper = { group = "com.arkivanov.essenty", name = "state-keeper", version.ref = "essenty" }
+decompose-essenty-instanceKeeper = { group = "com.arkivanov.essenty", name = "instance-keeper", version.ref = "essenty" }
+decompose-essenty-backHandler = { group = "com.arkivanov.essenty", name = "back-handler", version.ref = "essenty" }
+decompose-extensions-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
+
+# Compottie
+compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
+compottie-dot = { module = "io.github.alexzhirkevich:compottie-dot", version.ref = "compottie" }
+compottie-network = { module = "io.github.alexzhirkevich:compottie-network", version.ref = "compottie" }
+compottie-resources = { module = "io.github.alexzhirkevich:compottie-resources", version.ref = "compottie" }
+
+# Kotlinx
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-serialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf", version.ref = "kotlinxSerialization" }
+
+# Koin
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+
+# Kotlin Crypto
+kotlincrypto-hash-sha2 = { module = "org.kotlincrypto.hash:sha2", version.ref = "kotlincrypto" }
+kotlincrypto-macs-hmac-sha1 = { module = "org.kotlincrypto.macs:hmac-sha1", version.ref = "kotlincrypto" }
+kotlincrypto-macs-hmac-sha2 = { module = "org.kotlincrypto.macs:hmac-sha2", version.ref = "kotlincrypto" }
+kotlincrypto-secure-random = { module = "org.kotlincrypto:secure-random", version.ref = "kotlincrypto-secure-random" }
+uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
+uriKmp = { module = "com.eygraber:uri-kmp", version.ref = "uri-kmp" }
+buffer = { module = "com.ditchoom:buffer", version.ref = "buffer" }
+encoding-base32 = { module = "io.matthewnelson.encoding:base32", version.ref = "encoding" }
+encoding-base64 = { module = "io.matthewnelson.encoding:base64", version.ref = "encoding" }
+
+# Multiplatfrom storage api
+multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatform-settings" }
+multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatform-settings" }
+
+# Desktop
+webcam-capture = { module = "com.github.sarxos:webcam-capture", version.ref = "webcamCapture" }
+webcam-capture-driver-native = { module = "io.github.eduramiba:webcam-capture-driver-native", version.ref = "webcamCaptureDriverNative" }
+zxing-core = { module = "com.google.zxing:core", version.ref = "zxing-core" }
+zxing-javase = { module = "com.google.zxing:javase", version.ref = "zxing-core" }
+
+# Haze
+haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze-stable" }
+
+# FileKit
+filekit-compose = { module = "io.github.vinceglb:filekit-compose", version.ref = "filekitCompose" }
+
+# QR Generator
+qrose-qr = { module = "io.github.alexzhirkevich:qrose", version.ref = "qrose-qr" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
