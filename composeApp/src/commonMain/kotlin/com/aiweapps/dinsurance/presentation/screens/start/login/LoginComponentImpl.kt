@@ -38,6 +38,7 @@ class LoginComponentImpl(
     }
 
     override fun onLoginViaDimoPressed() {
+        println("Start login flow")
         repository.launchOAuth(contextHolder = contextHolder)
     }
 
