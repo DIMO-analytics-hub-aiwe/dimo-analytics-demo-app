@@ -10,4 +10,12 @@ class LoginComponentImpl(
 
     override fun onBackPressed() = onBack()
 
+    override fun onLoginPressed() {
+
+    }
+
+    override fun onLoginViaDimoPressed() {
+
+    }
+
 }

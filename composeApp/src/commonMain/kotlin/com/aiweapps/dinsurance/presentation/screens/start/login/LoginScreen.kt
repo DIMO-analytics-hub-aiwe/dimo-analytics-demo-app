@@ -77,9 +77,7 @@ internal fun LoginScreen(
             Spacer(modifier = Modifier.height(height = Material3_Dp_48))
             DinsurancePrimaryButton(
                 text = stringResource(resource = Res.string.ButtonLogin),
-                onClick = {
-
-                }
+                onClick = component::onLoginPressed
             )
             Spacer(modifier = Modifier.height(height = Material3_Dp_8))
             DinsuranceSecondaryButton(
@@ -94,9 +92,7 @@ internal fun LoginScreen(
                         contentDescription = null,
                     )
                 },
-                onClick = {
-
-                }
+                onClick = component::onLoginViaDimoPressed
             )
         }
     }

@@ -64,12 +64,14 @@ kotlin {
             implementation(libs.google.accompanist.permissions)
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.android)
         }
         iosMain.dependencies {
             api(libs.decompose)
             api(libs.decompose.essenty.lifecycle)
             api(libs.decompose.essenty.stateKeeper)
             api(libs.decompose.essenty.backHandler)
+            api(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -80,6 +82,8 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.bundles.ktor)
+            implementation(libs.ktor.client.content.negotiation)
 
             api(libs.compottie)
             api(libs.compottie.dot)
@@ -107,6 +111,7 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             runtimeOnly(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.client.cio)
         }
     }
 }
