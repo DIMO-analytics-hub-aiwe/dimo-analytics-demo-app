@@ -11,4 +11,15 @@
     <string name="ButtonLoginViaDimo">Login via DIMO</string>
     <string name="SomethingWentWrong">Something went wrong</string>
     <string name="SuccessGettingTokens">Tokens successfully received</string>
+
+    <string name="YourCars">Your cars</string>
+    <string name="ViewAllTrips">View all trips</string>
+    <string name="Fuel">Fuel</string>
+    <string name="Mileage">Mileage</string>
+    <string name="LastTrip">Last trip</string>
+    <string name="TipsForYour">Tips for your</string>
+    <string name="Attentive">Attentive</string>
+    <string name="Aggressive">Aggressive</string>
+    <string name="DrivingScore">Driving score</string>
+    <string name="ImproveDrivingStyle">Your driving style needs improvement. Learn safe driving tips and get a discount</string>
 </resources>
