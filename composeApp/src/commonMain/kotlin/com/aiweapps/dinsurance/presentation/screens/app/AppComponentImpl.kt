@@ -49,7 +49,7 @@ class AppComponentImpl(
 
     private fun getInitialConfig(): Config  {
         return if (tokensDatastore.isLoggedIn()) {
-            Config.StartConfig
+            Config.MainConfig
         } else {
             Config.StartConfig
         }
