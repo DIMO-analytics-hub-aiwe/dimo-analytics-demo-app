@@ -1,6 +1,7 @@
 package com.aiweapps.dinsurance.presentation.screens.triphistory
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,29 +32,36 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aiweapps.dinsurance.presentation.components.topbar.DinsuranceTopBar
+import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreView
+import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreViewProgressBar
 import com.aiweapps.dinsurance.presentation.icons.Distance
 import com.aiweapps.dinsurance.presentation.icons.GasStation
 import com.aiweapps.dinsurance.presentation.icons.History
 import com.aiweapps.dinsurance.presentation.icons.Speed
-import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreViewProgressBar
-import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreView
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_24
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import com.aiweapps.dinsurance.presentation.theme.Stroke_Dp_1
+import com.aiweapps.dinsurance.presentation.theme.bottomSheetBackground
+import com.aiweapps.dinsurance.presentation.theme.primaryGray600
+import com.aiweapps.dinsurance.presentation.theme.primaryPaperBadge
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import d_insurance.composeapp.generated.resources.AverageSpeed
 import d_insurance.composeapp.generated.resources.Distance
+import d_insurance.composeapp.generated.resources.DrivingScore
 import d_insurance.composeapp.generated.resources.FuelConsumption
 import d_insurance.composeapp.generated.resources.Res
 import d_insurance.composeapp.generated.resources.TravelTime
+import d_insurance.composeapp.generated.resources.TripsHistoryDetailsTitle
+import d_insurance.composeapp.generated.resources.TripsHistoryTitle
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
@@ -65,11 +73,10 @@ internal fun TripHistory(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             DinsuranceTopBar(
-                text = "Trip history",
+                text = stringResource(resource = Res.string.TripsHistoryTitle),
                 onBackClicked = component::onBackClicked
             )
         },
-        containerColor = MaterialTheme.colorScheme.primaryContainer,
     ) { padding ->
         val state by component.state.subscribeAsState()
         val details = state.details
@@ -122,26 +129,28 @@ private fun TripBottomSheetDetails(
     val scope = rememberCoroutineScope()
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = bottomSheetState
+        sheetState = bottomSheetState,
+        containerColor = bottomSheetBackground
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = Material3_Dp_16)
-                .padding(bottom = Material3_Dp_16),
+                .padding(bottom = Material3_Dp_24),
             verticalArrangement = Arrangement.spacedBy(space = Material3_Dp_16)
         ) {
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     modifier = Modifier.fillMaxWidth().align(alignment = Alignment.CenterStart),
-                    text = "Trip details",
+                    text = stringResource(resource = Res.string.TripsHistoryDetailsTitle),
                     style = MaterialTheme.typography.titleLarge.copy(
-                        color = Color.Black,
+                        color = primaryPaperBadge,
                         textAlign = TextAlign.Center
                     )
                 )
                 Icon(
                     imageVector = Icons.Outlined.Close,
                     contentDescription = null,
+                    tint = primaryPaperBadge,
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
                         .padding(Material3_Dp_8)
@@ -156,7 +165,7 @@ private fun TripBottomSheetDetails(
                 )
             }
 
-            Text(text = item.date)
+            Text(text = item.date, color = primaryPaperBadge)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(Material3_Dp_8)
@@ -165,7 +174,7 @@ private fun TripBottomSheetDetails(
                     modifier = Modifier
                         .weight(1F)
                         .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(Material3_Dp_16)
+                    verticalArrangement = Arrangement.spacedBy(Material3_Dp_12)
                 ) {
                     TripHistoryInfoBadge(
                         modifier = Modifier.fillMaxWidth(),
@@ -190,9 +199,22 @@ private fun TripBottomSheetDetails(
                     iconSecond = Icons.Distance
                 )
             }
-            DrivingScoreView(item.progress, modifier = Modifier.clip(shape = RoundedCornerShape(size = Material3_Dp_16))
-                .background(color = MaterialTheme.colorScheme.secondary)
-                .padding(all = Material3_Dp_16)
+            Text(
+                text = stringResource(resource = Res.string.DrivingScore),
+                color = primaryPaperBadge,
+                fontSize = 16.sp
+            )
+            DrivingScoreView(
+                item.progress,
+                modifier = Modifier
+                    .border(
+                        width = Stroke_Dp_1, color = primaryGray600,
+                        shape = RoundedCornerShape(
+                            size = Material3_Dp_16
+                        )
+                    )
+                    .clip(shape = RoundedCornerShape(size = Material3_Dp_16))
+                    .padding(all = Material3_Dp_16)
             )
         }
     }
@@ -207,11 +229,11 @@ private fun TripHistoryDoubleInfoBadge(
     valueSecond: String,
     nameSecond: String,
     iconSecond: ImageVector,
-    ) {
+) {
     Column(
         modifier = modifier
-            .clip(shape = RoundedCornerShape(size = Material3_Dp_8))
-            .background(color = MaterialTheme.colorScheme.secondaryContainer)
+            .clip(shape = RoundedCornerShape(size = Material3_Dp_16))
+            .background(color = primaryGray600.copy(alpha = 0.2f))
             .padding(all = Material3_Dp_16),
     ) {
         Row(
@@ -226,28 +248,31 @@ private fun TripHistoryDoubleInfoBadge(
                     text = valueFirst,
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
+                        fontSize = 18.sp,
+                        color = primaryPaperBadge,
                     )
                 )
                 Text(
                     text = nameFirst,
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        color = primaryGray600
+                    )
                 )
             }
             Icon(
                 imageVector = iconFirst,
                 contentDescription = null,
-                tint = Color.White
+                tint = primaryPaperBadge
             )
         }
-        Spacer(modifier = Modifier.height(height = 23.dp))
+        Spacer(modifier = Modifier.height(height = Material3_Dp_20))
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(height = Stroke_Dp_1)
                 .background(MaterialTheme.colorScheme.primary)
         )
-        Spacer(modifier = Modifier.height(Material3_Dp_24))
+        Spacer(modifier = Modifier.height(22.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -260,18 +285,21 @@ private fun TripHistoryDoubleInfoBadge(
                     text = valueSecond,
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
+                        fontSize = 18.sp,
+                        color = primaryPaperBadge,
                     )
                 )
                 Text(
                     text = nameSecond,
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        color = primaryGray600
+                    )
                 )
             }
             Icon(
                 imageVector = iconSecond,
                 contentDescription = null,
-                tint = Color.White
+                tint = primaryPaperBadge
             )
         }
 
@@ -287,8 +315,8 @@ private fun TripHistoryInfoBadge(
 ) {
     Column(
         modifier = modifier
-            .clip(shape = RoundedCornerShape(size = Material3_Dp_8))
-            .background(color = MaterialTheme.colorScheme.secondaryContainer)
+            .clip(shape = RoundedCornerShape(size = Material3_Dp_16))
+            .background(color = primaryGray600.copy(alpha = 0.2f))
             .padding(all = Material3_Dp_16)
     ) {
         Row(
@@ -303,18 +331,21 @@ private fun TripHistoryInfoBadge(
                     text = value,
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
+                        fontSize = 18.sp,
+                        color = primaryPaperBadge
                     )
                 )
                 Text(
                     text = name,
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        color = primaryGray600
+                    )
                 )
             }
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = Color.White
+                tint = primaryPaperBadge
             )
         }
 
@@ -328,7 +359,7 @@ private fun TripRowHeader(
     Text(
         text = item.title,
         style = MaterialTheme.typography.bodyLarge.copy(
-            color = MaterialTheme.colorScheme.primary,
+            color = primaryGray600,
             fontWeight = FontWeight.Bold,
         )
     )
@@ -345,13 +376,13 @@ private fun TripRowItem(
             .clip(shape = RoundedCornerShape(size = Material3_Dp_16))
             .clickable(onClick = onClick),
         colors = ListItemDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer
+            containerColor = primaryGray600.copy(alpha = 0.2f)
         ),
         overlineContent = {
             Text(
                 text = item.date,
                 style = MaterialTheme.typography.bodyLarge.copy(
-                    color = MaterialTheme.colorScheme.primary,
+                    color = primaryPaperBadge,
                     fontWeight = FontWeight.Bold,
                 )
             )
@@ -360,7 +391,7 @@ private fun TripRowItem(
             Text(
                 text = item.subtitle,
                 style = MaterialTheme.typography.bodyLarge.copy(
-                    color = MaterialTheme.colorScheme.secondary
+                    color = primaryGray600
                 )
             )
         },
@@ -372,7 +403,7 @@ private fun TripRowItem(
                 Text(
                     text = item.timestamp,
                     style = MaterialTheme.typography.bodyLarge.copy(
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = primaryGray600,
                         fontWeight = FontWeight.Bold,
                     )
                 )

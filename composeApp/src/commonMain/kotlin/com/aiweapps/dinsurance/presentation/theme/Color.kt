@@ -3,11 +3,12 @@ package com.aiweapps.dinsurance.presentation.theme
 import androidx.compose.ui.graphics.Color
 
 //from figma
-val primaryBlack = Color(0xFF000000)
+val primaryBlack = Color(0xFF191919)
 val primaryWhite = Color(0xFFFFFFFF)
-val primaryGray600 = Color(0xFF7B7B7B)
+val primaryGray600 = Color(0xFFB7B7B7)
 val primaryMint = Color(0xFFBCFFF5)
 val primaryPaperBadge = Color(0xFFFFF8F3)
+val bottomSheetBackground = Color(0xFF262728)
 
 val primaryLight = primaryGray600//Color(0xFF5D5F5F)
 val onPrimaryLight = primaryGray600//Color(0xFFFFFFFF)

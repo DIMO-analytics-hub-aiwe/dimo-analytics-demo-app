@@ -254,10 +254,10 @@ fun DinsuranceTheme(
     val state by component.appThemeState.subscribeAsState()
     edgeToEdgeModeController(
         contextHolder = state.contextHolder,
-        isDarkMode = state.themeMode.isDarkTheme()
+        isDarkMode = !state.themeMode.isDarkTheme() //TODO should be not reverse
     )
     Crossfade(
-        targetState = state.themeMode.colorScheme(),
+        targetState = lightScheme, //TODO should be from state
         animationSpec = tween(durationMillis = DEFAULT_CROSS_FADE_ANIMATION_SPEED)
     ) { scheme ->
         MaterialTheme(

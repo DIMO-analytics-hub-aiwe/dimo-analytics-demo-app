@@ -17,6 +17,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
+import com.aiweapps.dinsurance.presentation.theme.primaryBlack
+import com.aiweapps.dinsurance.presentation.theme.primaryPaperBadge
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,15 +28,14 @@ fun DinsuranceTopBar(
 ) {
     CenterAlignedTopAppBar(
         colors = topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
+            containerColor = primaryBlack,
+            titleContentColor = primaryPaperBadge,
         ),
         title = {
             Text(
                 text = text,
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
                 )
             )
         },
@@ -48,7 +49,7 @@ fun DinsuranceTopBar(
                         .padding(all = Material3_Dp_4),
                     imageVector = Icons.Default.ArrowBackIosNew,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = primaryPaperBadge
                 )
             }
         }
