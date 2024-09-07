@@ -78,10 +78,6 @@ internal fun MainScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                colors = topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
                 title = {
                     Text(stringResource(resource = Res.string.YourCars), fontSize = 24.sp)
                 }

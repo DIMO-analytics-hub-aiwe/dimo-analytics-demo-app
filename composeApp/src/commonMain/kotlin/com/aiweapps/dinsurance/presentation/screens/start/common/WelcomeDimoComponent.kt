@@ -1,5 +1,6 @@
 package com.aiweapps.dinsurance.presentation.screens.start.common
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,17 +18,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import com.aiweapps.dinsurance.presentation.icons.DimoLogo
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_32
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_48
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_80
 import d_insurance.composeapp.generated.resources.LoginSubtitle
 import d_insurance.composeapp.generated.resources.LoginTitle
 import d_insurance.composeapp.generated.resources.Res
+import d_insurance.composeapp.generated.resources.app_logo
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun WelcomeDimoComponent(
-    content: @Composable ColumnScope.() -> Unit,
+    contentSpacing: Dp = Material3_Dp_80,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -37,27 +45,22 @@ fun WelcomeDimoComponent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Icon(
-            modifier = Modifier.size(
-                size = Material3_Dp_48
-            ),
-            imageVector = Icons.DimoLogo,
-            tint = MaterialTheme.colorScheme.primary,
-            contentDescription = null,
-        )
-        Spacer(modifier = Modifier.height(height = Material3_Dp_8))
+        Image(painterResource(Res.drawable.app_logo), contentDescription = null)
+        Spacer(modifier = Modifier.height(height = Material3_Dp_32))
         Text(
             text = stringResource(resource = Res.string.LoginTitle),
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Bold
             )
         )
+        Spacer(modifier = Modifier.height(height = Material3_Dp_4))
         Text(
             text = stringResource(resource = Res.string.LoginSubtitle),
             style = MaterialTheme.typography.bodyMedium.copy(
                 color = MaterialTheme.colorScheme.primary
             )
         )
+        Spacer(modifier = Modifier.height(height = contentSpacing))
         content()
     }
 }

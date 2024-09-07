@@ -10,6 +10,7 @@ import com.aiweapps.dinsurance.presentation.components.buttons.DinsurancePrimary
 import com.aiweapps.dinsurance.presentation.components.buttons.DinsuranceSecondaryButton
 import com.aiweapps.dinsurance.presentation.screens.start.common.WelcomeDimoComponent
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_24
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import d_insurance.composeapp.generated.resources.ButtonCreateNewAccount
@@ -28,7 +29,7 @@ internal fun StartScreen(
                 text = stringResource(resource = Res.string.ButtonLogin),
                 onClick = component::onLoginClicked
             )
-            Spacer(modifier = Modifier.height(height = Material3_Dp_8))
+            Spacer(modifier = Modifier.height(height = Material3_Dp_20))
             DinsuranceSecondaryButton(
                 text = stringResource(resource = Res.string.ButtonCreateNewAccount),
                 onClick = {

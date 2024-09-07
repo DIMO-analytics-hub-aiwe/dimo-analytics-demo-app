@@ -3,6 +3,7 @@ package com.aiweapps.dinsurance.presentation.screens.start.login
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,10 +29,14 @@ import com.aiweapps.dinsurance.presentation.components.input.MaterialInput
 import com.aiweapps.dinsurance.presentation.components.snackbar.DinsuranceSnackbar
 import com.aiweapps.dinsurance.presentation.icons.DimoLogo
 import com.aiweapps.dinsurance.presentation.screens.start.common.WelcomeDimoComponent
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_24
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_40
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_48
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_50
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import d_insurance.composeapp.generated.resources.ButtonLogin
@@ -63,10 +68,9 @@ internal fun LoginScreen(
         topBar = {
             Icon(
                 modifier = Modifier
-                    .padding(all = Material3_Dp_8)
+                    .padding(vertical = Material3_Dp_40)
                     .clip(shape = CircleShape)
-                    .clickable(onClick = component::onBackPressed)
-                    .padding(all = Material3_Dp_4),
+                    .clickable(onClick = component::onBackPressed),
                 imageVector = Icons.Default.ArrowBackIosNew,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary
@@ -78,8 +82,7 @@ internal fun LoginScreen(
         }
     ) {
         val state by component.state.subscribeAsState()
-        WelcomeDimoComponent {
-            Spacer(modifier = Modifier.height(height = Material3_Dp_16))
+        WelcomeDimoComponent(contentSpacing = Material3_Dp_50) {
             MaterialInput(
                 name = stringResource(resource = Res.string.EnterEmail),
                 text = text,
@@ -89,7 +92,7 @@ internal fun LoginScreen(
                     text = it
                 }
             )
-            Spacer(modifier = Modifier.height(height = Material3_Dp_8))
+            Spacer(modifier = Modifier.height(height = Material3_Dp_12))
             MaterialInput(
                 name = stringResource(resource = Res.string.EnterPassword),
                 text = pwd,
@@ -100,13 +103,13 @@ internal fun LoginScreen(
                     pwd = it
                 }
             )
-            Spacer(modifier = Modifier.height(height = Material3_Dp_48))
+            Spacer(modifier = Modifier.height(height = Material3_Dp_50))
             DinsurancePrimaryButton(
                 text = stringResource(resource = Res.string.ButtonLogin),
                 enabled = state.isLoading.not(),
                 onClick = component::onLoginPressed
             )
-            Spacer(modifier = Modifier.height(height = Material3_Dp_8))
+            Spacer(modifier = Modifier.height(height = Material3_Dp_20))
             DinsuranceSecondaryButton(
                 text = stringResource(resource = Res.string.ButtonLoginViaDimo),
                 enabled = state.isLoading.not(),
