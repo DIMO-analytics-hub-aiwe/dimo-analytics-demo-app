@@ -136,7 +136,7 @@ private fun CarDropdown(info: CarInfo, cars: List<CarInfo>, onSelect: (CarInfo) 
                         expanded = false
                         onSelect(it)
                     },
-                    text = { Text(it.name, modifier = Modifier.padding(10.dp)) }
+                    text = { Text(it.name, modifier = Modifier.padding(10.dp), fontSize = 17.sp) }
                 )
             }
         }
@@ -187,7 +187,7 @@ private fun BadgesView(carInfo: CarInfo) {
     Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_12)) {
         Row(horizontalArrangement = Arrangement.spacedBy(Material3_Dp_12),
             modifier = Modifier.fillMaxWidth()) {
-            InfoBadge(modifier = Modifier.weight(1.5f),
+            InfoBadge(modifier = Modifier.weight(1.4f),
                 title = stringResource(resource = Res.string.Mileage),
                 value = "${carInfo.mileage}  mi",
                 icon = painterResource(Res.drawable.mileage)
@@ -201,7 +201,7 @@ private fun BadgesView(carInfo: CarInfo) {
         Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Material3_Dp_12),
             modifier = Modifier.fillMaxWidth()) {
-            InfoBadge(modifier = Modifier.requiredWidth(100.dp),
+            InfoBadge(modifier = Modifier.requiredWidth(140.dp),
                 title = stringResource(resource = Res.string.Fuel),
                 value = "${carInfo.fuel} l",
                 icon = painterResource(Res.drawable.fuel)
