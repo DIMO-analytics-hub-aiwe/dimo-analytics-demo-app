@@ -3,7 +3,6 @@ package com.aiweapps.dinsurance.presentation.screens.start.login
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,7 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import com.aiweapps.dinsurance.presentation.components.buttons.DinsurancePrimaryButton
-import com.aiweapps.dinsurance.presentation.components.buttons.DinsuranceSecondaryButton
+import com.aiweapps.dinsurance.presentation.components.buttons.DinsuranceOutlinedButton
 import com.aiweapps.dinsurance.presentation.components.input.MaterialInput
 import com.aiweapps.dinsurance.presentation.components.snackbar.DinsuranceSnackbar
 import com.aiweapps.dinsurance.presentation.icons.DimoLogo
@@ -33,11 +32,8 @@ import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_24
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_40
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_48
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_50
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import d_insurance.composeapp.generated.resources.ButtonLogin
 import d_insurance.composeapp.generated.resources.ButtonLoginViaDimo
@@ -110,10 +106,10 @@ internal fun LoginScreen(
                 onClick = component::onLoginPressed
             )
             Spacer(modifier = Modifier.height(height = Material3_Dp_20))
-            DinsuranceSecondaryButton(
+            DinsuranceOutlinedButton(
                 text = stringResource(resource = Res.string.ButtonLoginViaDimo),
                 enabled = state.isLoading.not(),
-                icon = {
+                leftIcon = {
                     Icon(
                         modifier = Modifier.size(
                             size = Material3_Dp_24

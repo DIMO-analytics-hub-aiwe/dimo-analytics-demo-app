@@ -25,6 +25,7 @@ import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_48
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_80
+import com.aiweapps.dinsurance.presentation.theme.primaryWhite
 import d_insurance.composeapp.generated.resources.LoginSubtitle
 import d_insurance.composeapp.generated.resources.LoginTitle
 import d_insurance.composeapp.generated.resources.Res
@@ -51,7 +52,8 @@ fun WelcomeDimoComponent(
             text = stringResource(resource = Res.string.LoginTitle),
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Bold
-            )
+            ),
+            color = primaryWhite
         )
         Spacer(modifier = Modifier.height(height = Material3_Dp_4))
         Text(

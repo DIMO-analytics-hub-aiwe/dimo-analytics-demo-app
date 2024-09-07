@@ -2,10 +2,12 @@ package com.aiweapps.dinsurance.presentation.screens.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,8 +19,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,7 +28,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,15 +43,21 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aiweapps.dinsurance.presentation.components.buttons.DinsurancePrimaryButton
 import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreView
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_10
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_140
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_40
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_50
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_32
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_38
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
+import com.aiweapps.dinsurance.presentation.theme.Stroke_Dp_1
+import com.aiweapps.dinsurance.presentation.theme.primaryBlack
+import com.aiweapps.dinsurance.presentation.theme.primaryGray600
+import com.aiweapps.dinsurance.presentation.theme.primaryMint
+import com.aiweapps.dinsurance.presentation.theme.primaryPaperBadge
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import d_insurance.composeapp.generated.resources.DrivingScore
 import d_insurance.composeapp.generated.resources.Fuel
@@ -76,7 +84,11 @@ internal fun MainScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
+                colors = topAppBarColors(
+                    containerColor = primaryBlack,
+                    titleContentColor = primaryPaperBadge,
+                ),
                 title = {
                     Text(stringResource(resource = Res.string.YourCars), fontSize = 24.sp)
                 }
@@ -116,10 +128,12 @@ internal fun MainScreen(
 private fun CarDropdown(info: CarInfo, cars: List<CarInfo>, onSelect: (CarInfo) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
 
+    Spacer(modifier = Modifier.height(Stroke_Dp_1))
     Box {
-        Button(onClick = { expanded = true }, modifier = Modifier.height(Material3_Dp_40)) {
-            Text(info.name, color = Color.White, fontSize = 17.sp)
-            Icon(Icons.Default.ArrowDropDown, contentDescription = "Select car")
+        TextButton(onClick = { expanded = true }, modifier = Modifier.height(Material3_Dp_38)
+            .border(Stroke_Dp_1, primaryPaperBadge, RoundedCornerShape(Material3_Dp_32))) {
+            Text(info.name, color = primaryPaperBadge, fontSize = 17.sp)
+            Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Select car", tint = primaryMint)
         }
         DropdownMenu(
             expanded = expanded,
@@ -141,23 +155,24 @@ private fun CarDropdown(info: CarInfo, cars: List<CarInfo>, onSelect: (CarInfo) 
 @Composable
 private fun DrivingScoreView() {
     Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_12)) {
-        Text(stringResource(resource = Res.string.DrivingScore), fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        Text(stringResource(resource = Res.string.DrivingScore), fontWeight = FontWeight.Bold, fontSize = 20.sp, color = primaryPaperBadge)
 
         Column(modifier = Modifier
+            .border(Stroke_Dp_1, primaryGray600, RoundedCornerShape(Material3_Dp_8))
             .clip(RoundedCornerShape(Material3_Dp_8))
-            .background(Color.Gray)
+            .background(Color.Transparent)
             .padding(horizontal = Material3_Dp_16, vertical = Material3_Dp_12)) {
             DrivingScoreView(progress = 0.7f)
             Text(stringResource(resource = Res.string.ImproveDrivingStyle),
-                color = Color.White,
+                color = primaryGray600,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 TextButton(onClick = { }) {
-                    Text(stringResource(resource = Res.string.TipsForYour), fontSize = 16.sp, color = Color.White)
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = Color.White)
+                    Text(stringResource(resource = Res.string.TipsForYour), fontSize = 16.sp, color = primaryMint)
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = primaryMint)
                 }
             }
         }
@@ -189,9 +204,12 @@ private fun BadgesView(carInfo: CarInfo, component: MainComponent) {
                 icon = painterResource(Res.drawable.fuel)
             )
 
-            Button(onClick = component::onViewAllTripsClicked, modifier = Modifier.height(Material3_Dp_50).fillMaxWidth()) {
-                Text(stringResource(resource = Res.string.ViewAllTrips), color = Color.White, fontSize = 18.sp)
-                Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = Color.White)
+            DinsurancePrimaryButton(
+                text = stringResource(resource = Res.string.ViewAllTrips),
+                rightIcon = {
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = primaryBlack)
+                }) {
+                component.onViewAllTripsClicked()
             }
         }
     }
@@ -202,12 +220,12 @@ private fun InfoBadge(modifier: Modifier = Modifier,
                       title: String, value: String, icon: Painter) {
     Column(modifier = modifier
         .clip(RoundedCornerShape(16.dp))
-        .background(Color.Red)
+        .background(primaryGray600.copy(alpha = 0.2f))
         .padding(Material3_Dp_16), verticalArrangement = Arrangement.spacedBy(Material3_Dp_8)) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(title, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            Icon(icon, contentDescription = null, modifier = Modifier.size(24.dp))
+            Text(title, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = primaryGray600)
+            Icon(icon, contentDescription = null, modifier = Modifier.size(24.dp), tint = primaryGray600)
         }
-        Text(value, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        Text(value, fontWeight = FontWeight.Bold, fontSize = 20.sp, color = primaryPaperBadge)
     }
 }

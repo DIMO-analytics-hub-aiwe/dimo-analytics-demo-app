@@ -27,8 +27,11 @@ import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_14
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_2
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_6
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import com.aiweapps.dinsurance.presentation.theme.Stroke_Dp_1
+import com.aiweapps.dinsurance.presentation.theme.primaryGray600
+import com.aiweapps.dinsurance.presentation.theme.primaryPaperBadge
 import d_insurance.composeapp.generated.resources.Aggressive
 import d_insurance.composeapp.generated.resources.Attentive
 import d_insurance.composeapp.generated.resources.Res
@@ -45,7 +48,7 @@ fun DrivingScoreView(progress: Float, modifier: Modifier = Modifier) {
             text = stringResource(resource = Res.string.TravelProgressAlert),
             style = MaterialTheme.typography.bodySmall.copy(
                 textAlign = TextAlign.End,
-                color = MaterialTheme.colorScheme.background,
+                color = primaryPaperBadge,
                 fontSize = 14.sp
             )
         )
@@ -63,7 +66,7 @@ fun DrivingScoreView(progress: Float, modifier: Modifier = Modifier) {
                 text = stringResource(resource = Res.string.Attentive),
                 style = MaterialTheme.typography.bodySmall.copy(
                     textAlign = TextAlign.Start,
-                    color = MaterialTheme.colorScheme.background
+                    color = primaryGray600
                 )
             )
             Text(
@@ -71,7 +74,7 @@ fun DrivingScoreView(progress: Float, modifier: Modifier = Modifier) {
                 text = stringResource(resource = Res.string.Aggressive),
                 style = MaterialTheme.typography.bodySmall.copy(
                     textAlign = TextAlign.End,
-                    color = MaterialTheme.colorScheme.background
+                    color = primaryGray600
                 )
             )
         }
@@ -90,7 +93,7 @@ fun DrivingScoreViewProgressBar(
             .clip(shape = RoundedCornerShape(size = height / 2))
             .border(
                 width = Stroke_Dp_1,
-                color = MaterialTheme.colorScheme.primary,
+                color = primaryPaperBadge,
                 shape = RoundedCornerShape(size = height / 2)
             )
             .background(
@@ -108,10 +111,10 @@ fun DrivingScoreViewProgressBar(
         ) {
             val markerPosition = size.width * progress
             drawLine(
-                color = Color.Blue,
+                color = primaryPaperBadge,
                 start = Offset(x = markerPosition, y = 0F),
                 end = Offset(x = markerPosition, y = size.height),
-                strokeWidth = Material3_Dp_4.toPx()
+                strokeWidth = Material3_Dp_6.toPx()
             )
         }
     }

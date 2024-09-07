@@ -7,12 +7,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.aiweapps.dinsurance.presentation.components.buttons.DinsurancePrimaryButton
-import com.aiweapps.dinsurance.presentation.components.buttons.DinsuranceSecondaryButton
+import com.aiweapps.dinsurance.presentation.components.buttons.DinsuranceOutlinedButton
 import com.aiweapps.dinsurance.presentation.screens.start.common.WelcomeDimoComponent
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_24
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import d_insurance.composeapp.generated.resources.ButtonCreateNewAccount
 import d_insurance.composeapp.generated.resources.ButtonLogin
 import d_insurance.composeapp.generated.resources.Res
@@ -30,7 +29,7 @@ internal fun StartScreen(
                 onClick = component::onLoginClicked
             )
             Spacer(modifier = Modifier.height(height = Material3_Dp_20))
-            DinsuranceSecondaryButton(
+            DinsuranceOutlinedButton(
                 text = stringResource(resource = Res.string.ButtonCreateNewAccount),
                 onClick = {
 
