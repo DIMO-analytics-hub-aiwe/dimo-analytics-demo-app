@@ -126,7 +126,9 @@ private fun TripBottomSheetDetails(
     item: TripHistoryItem.Item,
     onDismiss: () -> Unit,
 ) {
-    val bottomSheetState = rememberModalBottomSheetState()
+    val bottomSheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true
+    )
     val scope = rememberCoroutineScope()
     ModalBottomSheet(
         onDismissRequest = onDismiss,
