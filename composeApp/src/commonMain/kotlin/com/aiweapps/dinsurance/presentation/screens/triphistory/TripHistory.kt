@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
@@ -152,8 +153,8 @@ private fun TripBottomSheetDetails(
                     contentDescription = null,
                     tint = primaryPaperBadge,
                     modifier = Modifier
+                        .clip(shape = CircleShape)
                         .align(Alignment.CenterEnd)
-                        .padding(Material3_Dp_8)
                         .clickable(
                             onClick = {
                                 scope.launch {
@@ -162,6 +163,7 @@ private fun TripBottomSheetDetails(
                                 }
                             }
                         )
+                        .padding(Material3_Dp_8)
                 )
             }
 
