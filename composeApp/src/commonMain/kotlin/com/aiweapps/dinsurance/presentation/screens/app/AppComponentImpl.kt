@@ -48,7 +48,7 @@ class AppComponentImpl(
     override val stack: Value<ChildStack<*, AppComponent.Child>> = _stack
 
     private fun getInitialConfig(): Config  {
-        return if (!tokensDatastore.isLoggedIn()) {
+        return if (tokensDatastore.isLoggedIn()) {
             Config.MainConfig
         } else {
             Config.StartConfig

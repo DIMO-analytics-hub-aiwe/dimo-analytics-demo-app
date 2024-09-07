@@ -30,6 +30,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
+import com.aiweapps.dinsurance.presentation.theme.primaryGray600
 import d_insurance.composeapp.generated.resources.EnterPassword
 import d_insurance.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.StringResource
@@ -83,6 +84,10 @@ internal fun MaterialInput(
                 { PasswordIcon(showPassword, onIconClick = { showPassword = !showPassword }) }
             } else null,
             colors = OutlinedTextFieldDefaults.colors(
+                unfocusedTextColor = primaryGray600,
+                focusedTextColor = primaryGray600,
+                unfocusedLabelColor = primaryGray600,
+                focusedLabelColor = primaryGray600,
                 unfocusedBorderColor = Color.Transparent,
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer
@@ -130,7 +135,8 @@ private fun PasswordIcon(
     IconButton(onClick = onIconClick) {
         Icon(
             imageVector = if (showPassword) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-            contentDescription = stringResource(Res.string.EnterPassword)
+            contentDescription = stringResource(Res.string.EnterPassword),
+            tint = primaryGray600
         )
     }
 }
