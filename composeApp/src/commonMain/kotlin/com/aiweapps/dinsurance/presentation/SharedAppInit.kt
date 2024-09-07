@@ -15,9 +15,9 @@ internal fun initDinsuranceApp(appDeclaration: KoinAppDeclaration = {}) {
         appDeclaration()
         modules(module {
             snackbarHostStateModule()
+            datastores()
             networkModule()
             repositories()
-            datastores()
         })
     }
 }
