@@ -21,12 +21,13 @@ class ApiService(
         const val CLIENT_ID = "0x4C619fa01e84Aa0F9165FB16FdAAFCA309c06711" //TODO should be hidden
         const val REDIRECT_URI = "dinsurance://login"
         const val GRAND_TYPE_FOR_GETTING_TOKEN = "authorization_code"
+        const val BASE_URL_AUTH = "https://auth.dimo.zone"
     }
 
     fun launchOAuth(contextHolder: ContextHolder) {
         launchBrowser(
             contextHolder = contextHolder,
-            url = "https://auth.dimo.zone/auth?client_id=" +
+            url = "$BASE_URL_AUTH/auth?client_id=" +
                     CLIENT_ID +
                     "&redirect_uri=$REDIRECT_URI" +
                     "&scope=openid email" +
@@ -38,7 +39,7 @@ class ApiService(
         code: String,
     ): TokenResponseDTO {
         val response = client.safeRequest<String, HttpExceptions> {
-            url(urlString = "https://auth.dimo.zone/token")
+            url(urlString = "$BASE_URL_AUTH/token")
             method = HttpMethod.Post
             contentType(type = ContentType.Application.FormUrlEncoded)
             setBody(
