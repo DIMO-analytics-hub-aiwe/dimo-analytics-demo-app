@@ -22,4 +22,11 @@
     <string name="Aggressive">Aggressive</string>
     <string name="DrivingScore">Driving score</string>
     <string name="ImproveDrivingStyle">Your driving style needs improvement. Learn safe driving tips and get a discount</string>
+    <string name="TripsHistoryTitle">Trip history</string>
+    <string name="TripsHistoryDetailsTitle">Trip details</string>
+    <string name="AverageSpeed">Average speed</string>
+    <string name="FuelConsumption">Fuel consumption</string>
+    <string name="Distance">Distance</string>
+    <string name="TravelTime">Travel time</string>
+    <string name="TravelProgressAlert">Try to avoid sudden braking</string>
 </resources>

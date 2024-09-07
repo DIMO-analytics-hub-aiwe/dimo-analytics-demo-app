@@ -1,4 +1,4 @@
-package com.aiweapps.dinsurance.presentation.screens.start.main
+package com.aiweapps.dinsurance.presentation.screens.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,12 +24,10 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,7 +41,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
@@ -103,7 +100,7 @@ internal fun MainScreen(
                         .aspectRatio(16/9f)
                         .clip(RoundedCornerShape(16.dp))
                 )
-                BadgesView(info)
+                BadgesView(carInfo = info, component = component)
                 DrivingScoreView()
             } else {
                 Text("Loading info...")
@@ -179,7 +176,7 @@ private fun DrivingScoreView() {
 }
 
 @Composable
-private fun BadgesView(carInfo: CarInfo) {
+private fun BadgesView(carInfo: CarInfo, component: MainComponent) {
     Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_12)) {
         Row(horizontalArrangement = Arrangement.spacedBy(Material3_Dp_12),
             modifier = Modifier.fillMaxWidth()) {
@@ -203,7 +200,7 @@ private fun BadgesView(carInfo: CarInfo) {
                 icon = painterResource(Res.drawable.fuel)
             )
 
-            Button(onClick = { }, modifier = Modifier.height(50.dp).fillMaxWidth()) {
+            Button(onClick = component::onViewAllTripsClicked, modifier = Modifier.height(50.dp).fillMaxWidth()) {
                 Text(stringResource(resource = Res.string.ViewAllTrips), color = Color.White, fontSize = 18.sp)
                 Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = Color.White)
             }

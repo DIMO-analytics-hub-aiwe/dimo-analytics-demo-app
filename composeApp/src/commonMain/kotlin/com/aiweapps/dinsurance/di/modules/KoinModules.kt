@@ -2,6 +2,7 @@ package com.aiweapps.dinsurance.di.modules
 
 import androidx.compose.material3.SnackbarHostState
 import com.aiweapps.dinsurance.data.LoginRepository
+import com.aiweapps.dinsurance.data.TripHistoryRepository
 import com.aiweapps.dinsurance.data.datastore.StateFlowDatasource
 import com.aiweapps.dinsurance.data.datastore.TokensDatastore
 import com.aiweapps.dinsurance.data.dto.TokenResponseDTO
@@ -26,6 +27,7 @@ fun Module.snackbarHostStateModule() {
 
 fun Module.repositories() {
     singleOf(::LoginRepository)
+    singleOf(::TripHistoryRepository)
 }
 
 fun Module.datastores() {

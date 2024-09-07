@@ -1,4 +1,4 @@
-package com.aiweapps.dinsurance.presentation.screens.start.main
+package com.aiweapps.dinsurance.presentation.screens.main
 
 import androidx.compose.runtime.Immutable
 import com.arkivanov.decompose.value.Value
@@ -8,6 +8,8 @@ interface MainComponent {
     val state: Value<MainState>
 
     fun onSelectCar(carInfo: CarInfo)
+
+    fun onViewAllTripsClicked()
 
 }
 

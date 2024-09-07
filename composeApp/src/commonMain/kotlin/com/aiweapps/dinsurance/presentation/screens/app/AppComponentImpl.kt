@@ -1,11 +1,11 @@
 package com.aiweapps.dinsurance.presentation.screens.app
 
-import com.aiweapps.dinsurance.data.LoginRepository
 import com.aiweapps.dinsurance.data.datastore.TokensDatastore
 import com.aiweapps.dinsurance.presentation.decompose.base.BaseComponent
+import com.aiweapps.dinsurance.presentation.screens.main.MainComponentImpl
 import com.aiweapps.dinsurance.presentation.screens.start.StartComponentImpl
 import com.aiweapps.dinsurance.presentation.screens.start.login.LoginComponentImpl
-import com.aiweapps.dinsurance.presentation.screens.start.main.MainComponentImpl
+import com.aiweapps.dinsurance.presentation.screens.triphistory.TripHistoryComponentImpl
 import com.aiweapps.dinsurance.presentation.theme.AppThemeState
 import com.aiweapps.dinsurance.presentation.theme.ThemeMode
 import com.arkivanov.decompose.ComponentContext
@@ -79,7 +79,16 @@ class AppComponentImpl(
             )
             is Config.MainConfig -> AppComponent.Child.MainChild(
                 component = MainComponentImpl(
-                    componentContext = componentContext
+                    componentContext = componentContext,
+                    onViewAllTrips = {
+                        nav.push(configuration = Config.TripHistory)
+                    }
+                )
+            )
+            is Config.TripHistory -> AppComponent.Child.TripHistoryChild(
+                component = TripHistoryComponentImpl(
+                    componentContext = componentContext,
+                    onBack = ::onBackClicked
                 )
             )
         }
@@ -103,5 +112,8 @@ class AppComponentImpl(
 
         @Serializable
         data object MainConfig : Config
+
+        @Serializable
+        data object TripHistory : Config
     }
 }

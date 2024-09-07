@@ -1,21 +1,16 @@
-package com.aiweapps.dinsurance.presentation.screens.start.main
+package com.aiweapps.dinsurance.presentation.screens.main
 
 import com.aiweapps.dinsurance.extensions.launchSafe
 import com.aiweapps.dinsurance.presentation.decompose.base.BaseComponent
-import com.aiweapps.dinsurance.utils.oauth.OAuthCallbackHandler
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.update
-import d_insurance.composeapp.generated.resources.Res
-import d_insurance.composeapp.generated.resources.SomethingWentWrong
-import d_insurance.composeapp.generated.resources.SuccessGettingTokens
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainComponentImpl(
+    private val onViewAllTrips: () -> Unit,
     componentContext: ComponentContext,
 ) : MainComponent, BaseComponent(componentContext) {
 
@@ -59,5 +54,7 @@ class MainComponentImpl(
             }
         )
     }
+
+    override fun onViewAllTripsClicked() = onViewAllTrips()
 
 }
