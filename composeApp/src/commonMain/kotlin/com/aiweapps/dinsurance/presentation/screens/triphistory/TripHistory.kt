@@ -167,7 +167,7 @@ private fun TripBottomSheetDetails(
             Text(text = item.date)
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Material3_Dp_16)
+                horizontalArrangement = Arrangement.spacedBy(Material3_Dp_8)
             ) {
                 Column(
                     modifier = Modifier
@@ -270,12 +270,13 @@ private fun TripHistoryDoubleInfoBadge(
                 Text(
                     text = valueFirst,
                     style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
                     )
                 )
                 Text(
                     text = nameFirst,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodySmall
                 )
             }
             Icon(
@@ -304,12 +305,12 @@ private fun TripHistoryDoubleInfoBadge(
                     text = valueSecond,
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
+                        fontSize = 18.sp
                     )
                 )
                 Text(
                     text = nameSecond,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodySmall
                 )
             }
             Icon(
@@ -346,12 +347,13 @@ private fun TripHistoryInfoBadge(
                 Text(
                     text = value,
                     style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
                     )
                 )
                 Text(
                     text = name,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodySmall
                 )
             }
             Icon(
