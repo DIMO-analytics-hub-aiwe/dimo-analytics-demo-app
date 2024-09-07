@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -39,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -50,7 +52,6 @@ import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import d_insurance.composeapp.generated.resources.Aggressive
 import d_insurance.composeapp.generated.resources.Attentive
-import d_insurance.composeapp.generated.resources.ButtonLogin
 import d_insurance.composeapp.generated.resources.DrivingScore
 import d_insurance.composeapp.generated.resources.Fuel
 import d_insurance.composeapp.generated.resources.ImproveDrivingStyle
@@ -60,8 +61,10 @@ import d_insurance.composeapp.generated.resources.Res
 import d_insurance.composeapp.generated.resources.TipsForYour
 import d_insurance.composeapp.generated.resources.ViewAllTrips
 import d_insurance.composeapp.generated.resources.YourCars
-import d_insurance.composeapp.generated.resources.compose_multiplatform
+import d_insurance.composeapp.generated.resources.fuel
 import d_insurance.composeapp.generated.resources.golf
+import d_insurance.composeapp.generated.resources.mileage
+import d_insurance.composeapp.generated.resources.trip
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -79,7 +82,9 @@ internal fun MainScreen(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
-                title = { Text(stringResource(resource = Res.string.YourCars)) }
+                title = {
+                    Text(stringResource(resource = Res.string.YourCars), fontSize = 24.sp)
+                }
             )
     }) { innerPadding ->
 
@@ -100,7 +105,7 @@ internal fun MainScreen(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxWidth()
                         .aspectRatio(16/9f)
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(16.dp))
                 )
                 BadgesView(info)
                 DrivingScoreView()
@@ -117,8 +122,8 @@ private fun CarDropdown(info: CarInfo, cars: List<CarInfo>, onSelect: (CarInfo) 
     var expanded by remember { mutableStateOf(false) }
 
     Box {
-        Button(onClick = { expanded = true }, modifier = Modifier.height(52.dp)) {
-            Text(info.name, color = Color.White, fontSize = 18.sp)
+        Button(onClick = { expanded = true }, modifier = Modifier.height(40.dp)) {
+            Text(info.name, color = Color.White, fontSize = 17.sp)
             Icon(Icons.Default.ArrowDropDown, contentDescription = "Select car")
         }
         DropdownMenu(
@@ -169,7 +174,7 @@ private fun DrivingScoreView() {
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 TextButton(onClick = { }) {
-                    Text(stringResource(resource = Res.string.TipsForYour), fontSize = 16.sp, color = Color.White, textDecoration = TextDecoration.Underline)
+                    Text(stringResource(resource = Res.string.TipsForYour), fontSize = 16.sp, color = Color.White)
                     Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = Color.White)
                 }
             }
@@ -182,15 +187,27 @@ private fun BadgesView(carInfo: CarInfo) {
     Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_12)) {
         Row(horizontalArrangement = Arrangement.spacedBy(Material3_Dp_12),
             modifier = Modifier.fillMaxWidth()) {
-            InfoBadge(modifier = Modifier.weight(1.5f), title = stringResource(resource = Res.string.Mileage), value = "${carInfo.mileage}  mi")
-            InfoBadge(modifier = Modifier.weight(1f), title = stringResource(resource = Res.string.LastTrip), value = "${carInfo.lastTrip}  mi")
+            InfoBadge(modifier = Modifier.weight(1.5f),
+                title = stringResource(resource = Res.string.Mileage),
+                value = "${carInfo.mileage}  mi",
+                icon = painterResource(Res.drawable.mileage)
+            )
+            InfoBadge(modifier = Modifier.weight(1f),
+                title = stringResource(resource = Res.string.LastTrip),
+                value = "${carInfo.lastTrip}  mi",
+                icon = painterResource(Res.drawable.trip)
+            )
         }
         Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Material3_Dp_12),
             modifier = Modifier.fillMaxWidth()) {
-            InfoBadge(modifier = Modifier.requiredWidth(100.dp), title = stringResource(resource = Res.string.Fuel), value = "${carInfo.fuel} l")
+            InfoBadge(modifier = Modifier.requiredWidth(100.dp),
+                title = stringResource(resource = Res.string.Fuel),
+                value = "${carInfo.fuel} l",
+                icon = painterResource(Res.drawable.fuel)
+            )
 
-            Button(onClick = { }, modifier = Modifier.height(52.dp).fillMaxWidth()) {
+            Button(onClick = { }, modifier = Modifier.height(50.dp).fillMaxWidth()) {
                 Text(stringResource(resource = Res.string.ViewAllTrips), color = Color.White, fontSize = 18.sp)
                 Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = Color.White)
             }
@@ -200,12 +217,15 @@ private fun BadgesView(carInfo: CarInfo) {
 
 @Composable
 private fun InfoBadge(modifier: Modifier = Modifier,
-                      title: String, value: String) {
+                      title: String, value: String, icon: Painter) {
     Column(modifier = modifier
-        .clip(RoundedCornerShape(8.dp))
+        .clip(RoundedCornerShape(16.dp))
         .background(Color.Red)
         .padding(16.dp)) {
-        Text(title, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-        Text(value, fontWeight = FontWeight.Bold, fontSize = 22.sp)
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(title, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Icon(icon, contentDescription = null, modifier = Modifier.size(24.dp))
+        }
+        Text(value, fontWeight = FontWeight.Bold, fontSize = 20.sp)
     }
 }
