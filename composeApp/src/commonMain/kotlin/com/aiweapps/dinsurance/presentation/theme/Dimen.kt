@@ -38,6 +38,7 @@ val Material3_Dp_120 = 120.dp
 val Material3_Dp_128 = 128.dp
 val Material3_Dp_132 = 132.dp
 val Material3_Dp_136 = 136.dp
+val Material3_Dp_140 = 140.dp
 val Material3_Dp_256 = 256.dp
 val Material3_Dp_292 = 292.dp
 val Material3_Dp_324 = 324.dp

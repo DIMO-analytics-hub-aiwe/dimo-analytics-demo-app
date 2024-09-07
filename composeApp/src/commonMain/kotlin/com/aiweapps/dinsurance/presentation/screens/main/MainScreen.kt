@@ -42,9 +42,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreView
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_10
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_140
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_40
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_50
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import d_insurance.composeapp.generated.resources.DrivingScore
 import d_insurance.composeapp.generated.resources.Fuel
@@ -95,7 +100,7 @@ internal fun MainScreen(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxWidth()
                         .aspectRatio(16/9f)
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(Material3_Dp_16))
                 )
                 BadgesView(carInfo = info, component = component)
                 DrivingScoreView()
@@ -112,7 +117,7 @@ private fun CarDropdown(info: CarInfo, cars: List<CarInfo>, onSelect: (CarInfo) 
     var expanded by remember { mutableStateOf(false) }
 
     Box {
-        Button(onClick = { expanded = true }, modifier = Modifier.height(40.dp)) {
+        Button(onClick = { expanded = true }, modifier = Modifier.height(Material3_Dp_40)) {
             Text(info.name, color = Color.White, fontSize = 17.sp)
             Icon(Icons.Default.ArrowDropDown, contentDescription = "Select car")
         }
@@ -126,7 +131,7 @@ private fun CarDropdown(info: CarInfo, cars: List<CarInfo>, onSelect: (CarInfo) 
                         expanded = false
                         onSelect(it)
                     },
-                    text = { Text(it.name, modifier = Modifier.padding(10.dp), fontSize = 17.sp) }
+                    text = { Text(it.name, modifier = Modifier.padding(Material3_Dp_10), fontSize = 17.sp) }
                 )
             }
         }
@@ -139,7 +144,7 @@ private fun DrivingScoreView() {
         Text(stringResource(resource = Res.string.DrivingScore), fontWeight = FontWeight.Bold, fontSize = 20.sp)
 
         Column(modifier = Modifier
-            .clip(RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(Material3_Dp_8))
             .background(Color.Gray)
             .padding(horizontal = Material3_Dp_16, vertical = Material3_Dp_12)) {
             DrivingScoreView(progress = 0.7f)
@@ -161,7 +166,7 @@ private fun DrivingScoreView() {
 
 @Composable
 private fun BadgesView(carInfo: CarInfo, component: MainComponent) {
-    Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_12)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_8)) {
         Row(horizontalArrangement = Arrangement.spacedBy(Material3_Dp_12),
             modifier = Modifier.fillMaxWidth()) {
             InfoBadge(modifier = Modifier.weight(1.4f),
@@ -178,13 +183,13 @@ private fun BadgesView(carInfo: CarInfo, component: MainComponent) {
         Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Material3_Dp_12),
             modifier = Modifier.fillMaxWidth()) {
-            InfoBadge(modifier = Modifier.requiredWidth(140.dp),
+            InfoBadge(modifier = Modifier.requiredWidth(Material3_Dp_140),
                 title = stringResource(resource = Res.string.Fuel),
                 value = "${carInfo.fuel} l",
                 icon = painterResource(Res.drawable.fuel)
             )
 
-            Button(onClick = component::onViewAllTripsClicked, modifier = Modifier.height(50.dp).fillMaxWidth()) {
+            Button(onClick = component::onViewAllTripsClicked, modifier = Modifier.height(Material3_Dp_50).fillMaxWidth()) {
                 Text(stringResource(resource = Res.string.ViewAllTrips), color = Color.White, fontSize = 18.sp)
                 Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = Color.White)
             }
@@ -198,7 +203,7 @@ private fun InfoBadge(modifier: Modifier = Modifier,
     Column(modifier = modifier
         .clip(RoundedCornerShape(16.dp))
         .background(Color.Red)
-        .padding(16.dp)) {
+        .padding(Material3_Dp_16), verticalArrangement = Arrangement.spacedBy(Material3_Dp_8)) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(title, fontWeight = FontWeight.Bold, fontSize = 16.sp)
             Icon(icon, contentDescription = null, modifier = Modifier.size(24.dp))
