@@ -41,7 +41,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aiweapps.dinsurance.presentation.screens.start.common.DrivingScoreView
+import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreView
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20

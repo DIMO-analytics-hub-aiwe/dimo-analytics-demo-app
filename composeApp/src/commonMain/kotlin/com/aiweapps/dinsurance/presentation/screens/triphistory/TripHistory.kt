@@ -42,8 +42,8 @@ import com.aiweapps.dinsurance.presentation.icons.Distance
 import com.aiweapps.dinsurance.presentation.icons.GasStation
 import com.aiweapps.dinsurance.presentation.icons.History
 import com.aiweapps.dinsurance.presentation.icons.Speed
-import com.aiweapps.dinsurance.presentation.screens.start.common.DrivingScoreViewProgressBar
-import com.aiweapps.dinsurance.presentation.screens.start.common.DrivingScoreView
+import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreViewProgressBar
+import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreView
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_24
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8

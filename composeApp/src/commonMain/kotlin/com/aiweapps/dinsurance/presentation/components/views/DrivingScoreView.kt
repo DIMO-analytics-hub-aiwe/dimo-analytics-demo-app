@@ -1,4 +1,4 @@
-package com.aiweapps.dinsurance.presentation.screens.start.common
+package com.aiweapps.dinsurance.presentation.components.views
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -21,8 +21,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
+import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_14
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_2
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
@@ -44,13 +46,14 @@ fun DrivingScoreView(progress: Float, modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.bodySmall.copy(
                 textAlign = TextAlign.End,
                 color = MaterialTheme.colorScheme.background,
-                fontSize = 10.sp
+                fontSize = 14.sp
             )
         )
         Spacer(modifier = Modifier.height(height = Material3_Dp_2))
         DrivingScoreViewProgressBar(
             modifier = Modifier.fillMaxWidth(),
-            progress = progress
+            progress = progress,
+            height = Material3_Dp_14
         )
         Row(
             modifier = Modifier.fillMaxWidth().padding(vertical = Material3_Dp_8)
@@ -79,17 +82,16 @@ fun DrivingScoreView(progress: Float, modifier: Modifier = Modifier) {
 fun DrivingScoreViewProgressBar(
     modifier: Modifier = Modifier,
     progress: Float = 0.7F,
+    height: Dp = Material3_Dp_12
 ) {
     Box(
         modifier = modifier
-            .height(height = Material3_Dp_12)
-            .clip(shape = RoundedCornerShape(size = Material3_Dp_8))
+            .height(height = height)
+            .clip(shape = RoundedCornerShape(size = height / 2))
             .border(
                 width = Stroke_Dp_1,
                 color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(
-                    size = Material3_Dp_8
-                )
+                shape = RoundedCornerShape(size = height / 2)
             )
             .background(
                 brush = Brush.horizontalGradient(
