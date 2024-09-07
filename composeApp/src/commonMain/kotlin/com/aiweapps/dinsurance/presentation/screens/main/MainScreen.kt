@@ -1,6 +1,5 @@
 package com.aiweapps.dinsurance.presentation.screens.main
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -9,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -43,6 +43,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import com.aiweapps.dinsurance.presentation.components.buttons.DinsurancePrimaryButton
 import com.aiweapps.dinsurance.presentation.components.views.DrivingScoreView
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_10
@@ -69,7 +70,6 @@ import d_insurance.composeapp.generated.resources.TipsForYour
 import d_insurance.composeapp.generated.resources.ViewAllTrips
 import d_insurance.composeapp.generated.resources.YourCars
 import d_insurance.composeapp.generated.resources.fuel
-import d_insurance.composeapp.generated.resources.golf
 import d_insurance.composeapp.generated.resources.mileage
 import d_insurance.composeapp.generated.resources.trip
 import org.jetbrains.compose.resources.painterResource
@@ -101,23 +101,32 @@ internal fun MainScreen(
             .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(Material3_Dp_20)) {
 
-            val info = state.selectedCarInfo
-            if (info != null) {
-                CarDropdown(info, state.cars) {
-                    component.onSelectCar(it)
+            val selected = state.selectedVehicle
+            if (selected != null) {
+                CarDropdown(selected, state.vehicles) {
+                    component.onSelectVehicle(it)
                 }
-                Image(
-                    painterResource(Res.drawable.golf),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxWidth()
-                        .aspectRatio(16/9f)
-                        .clip(RoundedCornerShape(Material3_Dp_16))
-                )
-                BadgesView(carInfo = info, component = component)
+                if (selected.imageUrl != null) {
+                    AsyncImage(
+                        model = selected.imageUrl,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxWidth()
+                            .aspectRatio(16/9f)
+                            .clip(RoundedCornerShape(Material3_Dp_16))
+                    )
+                }
+            } else if (state.isLoading) {
+                LoadingView()
+                return@Column
+            }
+
+            val details = state.vehicleDetails
+            if (details != null) {
+                BadgesView(vehicleDetails = details, component = component)
                 DrivingScoreView()
             } else {
-                Text("Loading info...")
+                LoadingView()
             }
 
         }
@@ -125,30 +134,37 @@ internal fun MainScreen(
 }
 
 @Composable
-private fun CarDropdown(info: CarInfo, cars: List<CarInfo>, onSelect: (CarInfo) -> Unit) {
+private fun CarDropdown(selected: VehicleInfo, vehicles: List<VehicleInfo>, onSelect: (VehicleInfo) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
 
     Spacer(modifier = Modifier.height(Stroke_Dp_1))
     Box {
         TextButton(onClick = { expanded = true }, modifier = Modifier.height(Material3_Dp_38)
             .border(Stroke_Dp_1, primaryPaperBadge, RoundedCornerShape(Material3_Dp_32))) {
-            Text(info.name, color = primaryPaperBadge, fontSize = 17.sp)
+            Text(selected.definition.displayName, color = primaryPaperBadge, fontSize = 17.sp)
             Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Select car", tint = primaryMint)
         }
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            cars.forEach {
+            vehicles.forEach {
                 DropdownMenuItem(
                     onClick = {
                         expanded = false
                         onSelect(it)
                     },
-                    text = { Text(it.name, modifier = Modifier.padding(Material3_Dp_10), fontSize = 17.sp) }
+                    text = { Text(it.definition.displayName, modifier = Modifier.padding(Material3_Dp_10), fontSize = 17.sp) }
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun LoadingView() {
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+        Text("Loading...", color = primaryPaperBadge, fontSize = 20.sp, modifier = Modifier.align(Alignment.CenterHorizontally))
     }
 }
 
@@ -180,18 +196,18 @@ private fun DrivingScoreView() {
 }
 
 @Composable
-private fun BadgesView(carInfo: CarInfo, component: MainComponent) {
+private fun BadgesView(vehicleDetails: VehicleDetails, component: MainComponent) {
     Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_8)) {
         Row(horizontalArrangement = Arrangement.spacedBy(Material3_Dp_12),
             modifier = Modifier.fillMaxWidth()) {
             InfoBadge(modifier = Modifier.weight(1.4f),
                 title = stringResource(resource = Res.string.Mileage),
-                value = "${carInfo.mileage}  mi",
+                value = "${vehicleDetails.mileage}  mi",
                 icon = painterResource(Res.drawable.mileage)
             )
             InfoBadge(modifier = Modifier.weight(1f),
                 title = stringResource(resource = Res.string.LastTrip),
-                value = "${carInfo.lastTrip}  mi",
+                value = "${vehicleDetails.lastTrip}  mi",
                 icon = painterResource(Res.drawable.trip)
             )
         }
@@ -200,7 +216,7 @@ private fun BadgesView(carInfo: CarInfo, component: MainComponent) {
             modifier = Modifier.fillMaxWidth()) {
             InfoBadge(modifier = Modifier.requiredWidth(Material3_Dp_140),
                 title = stringResource(resource = Res.string.Fuel),
-                value = "${carInfo.fuel} l",
+                value = "${vehicleDetails.fuel} l",
                 icon = painterResource(Res.drawable.fuel)
             )
 

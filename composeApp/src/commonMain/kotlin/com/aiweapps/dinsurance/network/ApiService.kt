@@ -2,6 +2,8 @@ package com.aiweapps.dinsurance.network
 
 import com.aiweapps.dinsurance.data.ContextHolder
 import com.aiweapps.dinsurance.data.dto.TokenResponseDTO
+import com.aiweapps.dinsurance.presentation.screens.main.VehicleDetails
+import com.aiweapps.dinsurance.presentation.screens.main.VehiclesResponse
 import com.aiweapps.dinsurance.utils.json
 import com.aiweapps.dinsurance.utils.launchBrowser
 import io.ktor.client.HttpClient
@@ -22,6 +24,7 @@ class ApiService(
         const val REDIRECT_URI = "dinsurance://login"
         const val GRAND_TYPE_FOR_GETTING_TOKEN = "authorization_code"
         const val BASE_URL_AUTH = "https://auth.dimo.zone"
+        const val BASE_URL_API = "http://10.0.2.2:3000"
     }
 
     fun launchOAuth(contextHolder: ContextHolder) {
@@ -52,6 +55,28 @@ class ApiService(
                     }
                 )
             )
+        }
+        if (response is ApiResponse.Success) {
+            return json.decodeFromString(string = response.body)
+        }
+        throw parseException(response = response)
+    }
+
+    suspend fun getVehicles(): VehiclesResponse {
+        val response = client.safeRequest<String, HttpExceptions> {
+            url(urlString = "$BASE_URL_API/vehicles")
+            method = HttpMethod.Get
+        }
+        if (response is ApiResponse.Success) {
+            return json.decodeFromString(string = response.body)
+        }
+        throw parseException(response = response)
+    }
+
+    suspend fun getVehicleDetails(vehicleTokenId: Int): VehicleDetails {
+        val response = client.safeRequest<String, HttpExceptions> {
+            url(urlString = "$BASE_URL_API/vehicle/$vehicleTokenId")
+            method = HttpMethod.Get
         }
         if (response is ApiResponse.Success) {
             return json.decodeFromString(string = response.body)
