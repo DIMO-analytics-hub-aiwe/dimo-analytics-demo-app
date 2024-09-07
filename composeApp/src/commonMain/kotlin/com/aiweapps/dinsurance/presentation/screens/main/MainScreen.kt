@@ -2,7 +2,6 @@ package com.aiweapps.dinsurance.presentation.screens.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,19 +35,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aiweapps.dinsurance.presentation.screens.start.common.DrivingScoreView
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_20
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import d_insurance.composeapp.generated.resources.Aggressive
-import d_insurance.composeapp.generated.resources.Attentive
 import d_insurance.composeapp.generated.resources.DrivingScore
 import d_insurance.composeapp.generated.resources.Fuel
 import d_insurance.composeapp.generated.resources.ImproveDrivingStyle
@@ -145,20 +142,7 @@ private fun DrivingScoreView() {
             .clip(RoundedCornerShape(8.dp))
             .background(Color.Gray)
             .padding(horizontal = Material3_Dp_16, vertical = Material3_Dp_12)) {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                val brush = Brush.horizontalGradient(listOf(Color.Green, Color.Red))
-                Box(modifier = Modifier.fillMaxWidth()
-                    .height(16.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .border(1.dp, Color.White, RoundedCornerShape(8.dp))
-                    .background(brush))
-
-                Row(horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()) {
-                    Text(stringResource(resource = Res.string.Attentive), fontSize = 12.sp)
-                    Text(stringResource(resource = Res.string.Aggressive), fontSize = 12.sp)
-                }
-            }
+            DrivingScoreView(progress = 0.7f)
             Text(stringResource(resource = Res.string.ImproveDrivingStyle),
                 color = Color.White,
                 fontSize = 18.sp,

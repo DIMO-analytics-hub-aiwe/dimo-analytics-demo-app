@@ -1,8 +1,6 @@
 package com.aiweapps.dinsurance.presentation.screens.triphistory
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,8 +31,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -46,21 +42,17 @@ import com.aiweapps.dinsurance.presentation.icons.Distance
 import com.aiweapps.dinsurance.presentation.icons.GasStation
 import com.aiweapps.dinsurance.presentation.icons.History
 import com.aiweapps.dinsurance.presentation.icons.Speed
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_12
+import com.aiweapps.dinsurance.presentation.screens.start.common.DrivingScoreViewProgressBar
+import com.aiweapps.dinsurance.presentation.screens.start.common.DrivingScoreView
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_16
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_2
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_24
-import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_4
 import com.aiweapps.dinsurance.presentation.theme.Material3_Dp_8
 import com.aiweapps.dinsurance.presentation.theme.Stroke_Dp_1
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import d_insurance.composeapp.generated.resources.Aggressive
-import d_insurance.composeapp.generated.resources.Attentive
 import d_insurance.composeapp.generated.resources.AverageSpeed
 import d_insurance.composeapp.generated.resources.Distance
 import d_insurance.composeapp.generated.resources.FuelConsumption
 import d_insurance.composeapp.generated.resources.Res
-import d_insurance.composeapp.generated.resources.TravelProgressAlert
 import d_insurance.composeapp.generated.resources.TravelTime
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -198,47 +190,10 @@ private fun TripBottomSheetDetails(
                     iconSecond = Icons.Distance
                 )
             }
-            Column(
-                modifier = Modifier.fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(size = Material3_Dp_16))
-                    .background(color = MaterialTheme.colorScheme.secondary)
-                    .padding(all = Material3_Dp_16),
-            ) {
-                Text(
-                    modifier = Modifier.fillMaxWidth().padding(end = Material3_Dp_8),
-                    text = stringResource(resource = Res.string.TravelProgressAlert),
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        textAlign = TextAlign.End,
-                        color = MaterialTheme.colorScheme.background,
-                        fontSize = 10.sp
-                    )
-                )
-                Spacer(modifier = Modifier.height(height = Material3_Dp_2))
-                ProgressBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    progress = item.progress
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = Material3_Dp_8)
-                ) {
-                    Text(
-                        modifier = Modifier.weight(1F).fillMaxWidth(),
-                        text = stringResource(resource = Res.string.Attentive),
-                        style = MaterialTheme.typography.bodySmall.copy(
-                            textAlign = TextAlign.Start,
-                            color = MaterialTheme.colorScheme.background
-                        )
-                    )
-                    Text(
-                        modifier = Modifier.weight(1F).fillMaxWidth(),
-                        text = stringResource(resource = Res.string.Aggressive),
-                        style = MaterialTheme.typography.bodySmall.copy(
-                            textAlign = TextAlign.End,
-                            color = MaterialTheme.colorScheme.background
-                        )
-                    )
-                }
-            }
+            DrivingScoreView(item.progress, modifier = Modifier.clip(shape = RoundedCornerShape(size = Material3_Dp_16))
+                .background(color = MaterialTheme.colorScheme.secondary)
+                .padding(all = Material3_Dp_16)
+            )
         }
     }
 }
@@ -421,51 +376,11 @@ private fun TripRowItem(
                         fontWeight = FontWeight.Bold,
                     )
                 )
-                ProgressBar(
+                DrivingScoreViewProgressBar(
                     modifier = Modifier.fillMaxWidth(fraction = .5F),
                     progress = item.progress
                 )
             }
         }
     )
-}
-
-@Composable
-private fun ProgressBar(
-    modifier: Modifier = Modifier,
-    progress: Float = 0.7F,
-) {
-    Box(
-        modifier = modifier
-            .height(height = Material3_Dp_12)
-            .clip(shape = RoundedCornerShape(size = Material3_Dp_8))
-            .border(
-                width = Stroke_Dp_1,
-                color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(
-                    size = Material3_Dp_8
-                )
-            )
-            .background(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(
-                        Color.Green,
-                        Color.Red
-                    )
-                )
-            )
-    ) {
-        Canvas(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            val markerPosition = size.width * progress
-            drawLine(
-                color = Color.Blue,
-                start = Offset(x = markerPosition, y = 0F),
-                end = Offset(x = markerPosition, y = size.height),
-                strokeWidth = Material3_Dp_4.toPx()
-            )
-        }
-    }
 }
