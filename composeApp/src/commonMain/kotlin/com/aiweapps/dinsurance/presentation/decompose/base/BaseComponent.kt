@@ -12,6 +12,7 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.Lifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -29,7 +30,7 @@ abstract class BaseComponent(
 ) : ComponentContext by componentContext, KoinComponent {
 
     protected val scope: CoroutineScope
-        get() = coroutineScope(Dispatchers.Main.immediate)
+        get() = coroutineScope(Dispatchers.Main.immediate + SupervisorJob())
     protected val vibrationManager: VibrationManager = get()
     protected val contextHolder: ContextHolder = get()
 
