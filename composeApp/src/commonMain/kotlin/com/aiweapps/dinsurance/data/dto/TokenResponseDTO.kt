@@ -10,5 +10,7 @@ data class TokenResponseDTO(
     @SerialName("refresh_token")
     val refreshToken: String? = null,
     @SerialName("expires_in")
-    val expiresIn: Long? = null
+    val expiresIn: Long? = null,
+    @SerialName("authCode")
+    val authCode: String? = null,
 )

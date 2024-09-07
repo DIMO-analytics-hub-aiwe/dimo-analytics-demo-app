@@ -13,13 +13,19 @@ class TokensDatastore(
         return tokensDatasource.stateFlow.value.accessToken != null
     }
 
-    fun setTokens(
+    fun storeTokens(
         tokens: TokenResponseDTO,
+        authCode: String? = null,
         invokeOnCompletion: (() -> Unit)? = null
     ) {
         updateInScope(
-            value = {
-                tokens
+            value = { value ->
+                value.copy(
+                    accessToken = tokens.accessToken,
+                    refreshToken = tokens.refreshToken,
+                    expiresIn = tokens.expiresIn,
+                    authCode = authCode ?: value.authCode
+                )
             },
             invokeOnCompletion = invokeOnCompletion
         )

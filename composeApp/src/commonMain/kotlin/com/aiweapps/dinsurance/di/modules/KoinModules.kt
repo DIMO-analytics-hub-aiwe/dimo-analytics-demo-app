@@ -5,9 +5,8 @@ import com.aiweapps.dinsurance.data.LoginRepository
 import com.aiweapps.dinsurance.data.datastore.StateFlowDatasource
 import com.aiweapps.dinsurance.data.datastore.TokensDatastore
 import com.aiweapps.dinsurance.data.dto.TokenResponseDTO
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.serialization.kotlinx.json.json
+import com.aiweapps.dinsurance.network.ApiService
+import com.aiweapps.dinsurance.network.provideDinsuranceHttpClient
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.qualifier.StringQualifier
@@ -18,16 +17,6 @@ private val TOKENS_DATASOURCE_QUALIFIER: StringQualifier = named("tokensDatastor
 
 fun Module.snackbarHostStateModule() {
     singleOf(::SnackbarHostState)
-}
-
-fun Module.httpClientModule() {
-    single {
-        HttpClient {
-            install(ContentNegotiation) {
-                json(json = com.aiweapps.dinsurance.utils.json)
-            }
-        }
-    }
 }
 
 fun Module.repositories() {
@@ -44,4 +33,14 @@ fun Module.datastores() {
         )
     }
     single { TokensDatastore(tokensDatasource = get(qualifier = TOKENS_DATASOURCE_QUALIFIER)) }
+}
+
+fun Module.networkModule() {
+    single {
+        provideDinsuranceHttpClient(
+            datastore = get(qualifier = TOKENS_DATASOURCE_QUALIFIER),
+            service = get(),
+        )
+    }
+    singleOf(::ApiService)
 }

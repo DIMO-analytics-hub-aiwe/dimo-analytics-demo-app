@@ -1,7 +1,7 @@
 package com.aiweapps.dinsurance.presentation
 
 import com.aiweapps.dinsurance.di.modules.datastores
-import com.aiweapps.dinsurance.di.modules.httpClientModule
+import com.aiweapps.dinsurance.di.modules.networkModule
 import com.aiweapps.dinsurance.di.modules.repositories
 import com.aiweapps.dinsurance.di.modules.snackbarHostStateModule
 import org.koin.core.context.startKoin
@@ -15,7 +15,7 @@ internal fun initDinsuranceApp(appDeclaration: KoinAppDeclaration = {}) {
         appDeclaration()
         modules(module {
             snackbarHostStateModule()
-            httpClientModule()
+            networkModule()
             repositories()
             datastores()
         })
