@@ -22,6 +22,7 @@
     <string name="Aggressive">Aggressive</string>
     <string name="DrivingScore">Driving score</string>
     <string name="ImproveDrivingStyle">Your driving style needs improvement. Learn safe driving tips and get a discount</string>
+    <string name="YouCanGetDiscountForInsurance">You can get a discount on your insurance for safe driving!</string>
     <string name="TripsHistoryTitle">Trip history</string>
     <string name="TripsHistoryDetailsTitle">Trip details</string>
     <string name="AverageSpeed">Average speed</string>

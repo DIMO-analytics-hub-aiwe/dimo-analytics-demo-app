@@ -48,6 +48,8 @@ class MainComponentImpl(
                 _state.update { it.copy(selectedVehicle = vehicle, isLoading = true) }
                 val details = repository.getVehicleDetails(vehicle.tokenId)
                 _state.update { it.copy(vehicleDetails = details, isLoading = false) }
+                val drivingInfo = repository.getDrivingInfo(vehicle.tokenId)
+                _state.update { it.copy(drivingInfo = drivingInfo) }
             },
             onError = { error ->
                 _state.update { it.copy(isLoading = false) }

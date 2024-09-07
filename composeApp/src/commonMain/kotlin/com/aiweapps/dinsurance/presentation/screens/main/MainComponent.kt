@@ -19,6 +19,7 @@ data class MainState(
     val vehicles: List<VehicleInfo> = emptyList(),
     val selectedVehicle: VehicleInfo? = null,
     val vehicleDetails: VehicleDetails? = null,
+    val drivingInfo: DrivingScoreInfo? = null,
     val isLoading: Boolean = false
 )
 
@@ -60,3 +61,15 @@ data class VehicleDetails(
     val mileage: Float,
     val lastTrip: Float
 )
+
+@Serializable
+data class DrivingScoreInfo(
+    val point: Int
+) {
+    //INFO: value from 0 to 1
+    val displayValue: Float
+        get() = point / 10f
+
+    val discountAvailable: Boolean
+        get() = displayValue < 0.5
+}

@@ -68,6 +68,7 @@ import d_insurance.composeapp.generated.resources.Mileage
 import d_insurance.composeapp.generated.resources.Res
 import d_insurance.composeapp.generated.resources.TipsForYour
 import d_insurance.composeapp.generated.resources.ViewAllTrips
+import d_insurance.composeapp.generated.resources.YouCanGetDiscountForInsurance
 import d_insurance.composeapp.generated.resources.YourCars
 import d_insurance.composeapp.generated.resources.fuel
 import d_insurance.composeapp.generated.resources.mileage
@@ -124,7 +125,10 @@ internal fun MainScreen(
             val details = state.vehicleDetails
             if (details != null) {
                 BadgesView(vehicleDetails = details, component = component)
-                DrivingScoreView()
+                val drivingInfo = state.drivingInfo
+                if (drivingInfo != null) {
+                    DrivingScoreView(drivingInfo)
+                }
             } else {
                 LoadingView()
             }
@@ -165,33 +169,6 @@ private fun CarDropdown(selected: VehicleInfo, vehicles: List<VehicleInfo>, onSe
 private fun LoadingView() {
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
         Text("Loading...", color = primaryPaperBadge, fontSize = 20.sp, modifier = Modifier.align(Alignment.CenterHorizontally))
-    }
-}
-
-@Composable
-private fun DrivingScoreView() {
-    Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_12)) {
-        Text(stringResource(resource = Res.string.DrivingScore), fontWeight = FontWeight.Bold, fontSize = 20.sp, color = primaryPaperBadge)
-
-        Column(modifier = Modifier
-            .border(Stroke_Dp_1, primaryGray600, RoundedCornerShape(Material3_Dp_8))
-            .clip(RoundedCornerShape(Material3_Dp_8))
-            .background(Color.Transparent)
-            .padding(horizontal = Material3_Dp_16, vertical = Material3_Dp_12)) {
-            DrivingScoreView(progress = 0.7f)
-            Text(stringResource(resource = Res.string.ImproveDrivingStyle),
-                color = primaryGray600,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
-            )
-
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                TextButton(onClick = { }) {
-                    Text(stringResource(resource = Res.string.TipsForYour), fontSize = 16.sp, color = primaryMint)
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = primaryMint)
-                }
-            }
-        }
     }
 }
 
@@ -243,5 +220,41 @@ private fun InfoBadge(modifier: Modifier = Modifier,
             Icon(icon, contentDescription = null, modifier = Modifier.size(24.dp), tint = primaryGray600)
         }
         Text(value, fontWeight = FontWeight.Bold, fontSize = 20.sp, color = primaryPaperBadge)
+    }
+}
+
+@Composable
+private fun DrivingScoreView(info: DrivingScoreInfo) {
+    Column(verticalArrangement = Arrangement.spacedBy(Material3_Dp_12)) {
+        Text(stringResource(resource = Res.string.DrivingScore), fontWeight = FontWeight.Bold, fontSize = 20.sp, color = primaryPaperBadge)
+
+        Column(modifier = Modifier
+            .border(Stroke_Dp_1, primaryGray600, RoundedCornerShape(Material3_Dp_8))
+            .clip(RoundedCornerShape(Material3_Dp_8))
+            .background(Color.Transparent)
+            .padding(horizontal = Material3_Dp_16, vertical = Material3_Dp_12)) {
+            DrivingScoreView(progress = info.displayValue)
+
+            if (info.discountAvailable) {
+                Text(stringResource(resource = Res.string.YouCanGetDiscountForInsurance),
+                    color = primaryGray600,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium
+                )
+            } else {
+                Text(stringResource(resource = Res.string.ImproveDrivingStyle),
+                    color = primaryGray600,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium
+                )
+
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    TextButton(onClick = { }) {
+                        Text(stringResource(resource = Res.string.TipsForYour), fontSize = 16.sp, color = primaryMint)
+                        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Select car", tint = primaryMint)
+                    }
+                }
+            }
+        }
     }
 }

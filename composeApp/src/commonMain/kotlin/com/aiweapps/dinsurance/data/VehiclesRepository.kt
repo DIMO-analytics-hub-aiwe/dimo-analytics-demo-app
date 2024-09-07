@@ -1,6 +1,7 @@
 package com.aiweapps.dinsurance.data
 
 import com.aiweapps.dinsurance.network.ApiService
+import com.aiweapps.dinsurance.presentation.screens.main.DrivingScoreInfo
 import com.aiweapps.dinsurance.presentation.screens.main.VehicleDetails
 import com.aiweapps.dinsurance.presentation.screens.main.VehicleInfo
 
@@ -20,6 +21,11 @@ class VehiclesRepository(
             2000f,
             45f
         )
+    }
+
+    suspend fun getDrivingInfo(vehicleTokenId: Int): DrivingScoreInfo {
+//        return apiService.getVehicleDetails(vehicleTokenId)
+        return DrivingScoreInfo((1..9).random())
     }
 
 }
