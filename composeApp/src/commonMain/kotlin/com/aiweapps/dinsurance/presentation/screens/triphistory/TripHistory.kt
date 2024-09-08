@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -96,7 +97,8 @@ internal fun TripHistory(
         ) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(space = Material3_Dp_16)
+                verticalArrangement = Arrangement.spacedBy(space = Material3_Dp_16),
+                contentPadding = PaddingValues(bottom = Material3_Dp_24)
             ) {
                 items(
                     key = { item ->
